@@ -199,14 +199,14 @@ npm run dev
 # Contraseña: Admin123!
 ```
 
-## 📁 Estructura del Repositorio
+## Estructura del Repositorio
 
 ```
 CapstoneGrupo5/
 ├── README.md                    # Este archivo
 ├── context.md                   # Contexto y especificaciones
 │
-├── dashboard-web/               # ✅ Dashboard Web (IMPLEMENTADO)
+├── dashboard-web/               # Dashboard Web (IMPLEMENTADO)
 │   ├── README.md               # Documentación del dashboard
 │   ├── backend/                # Backend Node.js + Express
 │   │   ├── src/
@@ -270,7 +270,7 @@ Cumple con los requisitos
 - **Tasa de Error**: <1%
 - **Cobertura de Tests**: >80%
 
-## 🔧 Requisitos del Sistema
+## Requisitos del Sistema
 
 ### Desarrollo
 - Node.js 18.0.0+
