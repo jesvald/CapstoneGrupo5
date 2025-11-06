@@ -400,40 +400,9 @@ lsof -ti:3000 | xargs kill -9
 - Revisar logs en backend/logs/
 - Verificar conexión a la base de datos
 
-## Roadmap
-
-### Fase 1 (Actual) 
-- [x] Sistema de autenticación
-- [x] Dashboard principal con KPIs
-- [x] Visualizaciones básicas
-- [x] Sistema de alertas
-- [x] Filtros de fecha
-
-### Fase 2 (Próximo)
-- [ ] Exportación de reportes (PDF/Excel)
-- [ ] Dashboard en tiempo real con WebSockets
-- [ ] Módulo de gestión de proveedores
-- [ ] Módulo de gestión de licitaciones
-- [ ] Configuración de alertas personalizadas
-
-### Fase 3 (Futuro)
-- [ ] Análisis predictivo con ML
-- [ ] Dashboard móvil nativo
-- [ ] Integración con Slack/Teams
-- [ ] API pública documentada
-- [ ] Multi-tenancy
-
-## Contribución
-
-1. Fork el proyecto
-2. Crear una rama feature (`git checkout -b feature/AmazingFeature`)
-3. Commit cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abrir un Pull Request
-
 ## Equipo
 
-Dashboard desarrollado por el **Grupo 5 del Capstone** para la optimización del Sistema de Licitaciones B2B de Wherex.
+Dashboard desarrollado por el **Grupo 5 del Capstone 006V** para la optimización del Sistema de Licitaciones B2B de Wherex.
 
 ### Tecnologías del Stack Completo
 
