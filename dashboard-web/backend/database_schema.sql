@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS metricas_diarias (
 INSERT INTO usuarios (email, password_hash, nombre, role, activo) 
 VALUES (
   'admin@dashboard.com',
-  '$2a$10$Yj5W5YBwqQxz8c8gZ0b9ZuUQxLhEp9k.W8Kj0Q9Zl8c8gZ0b9ZuUQ', -- Hash de 'Admin123!'
+  '$2a$10$h/zvy/vTxnUdMReas6e.R.fzEdLx/fvf.JAhvLwCPjEj26zXwQdxS', -- Hash de 'Admin123!'
   'Administrador',
   'Admin',
   TRUE
