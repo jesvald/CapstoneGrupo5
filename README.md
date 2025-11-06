@@ -103,7 +103,7 @@ Optimizar el sistema de invitaciones y ofertas de la plataforma de licitaciones 
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-## Dashboard de Monitoreo (Implementado)
+## Dashboard de Monitoreo
 
 El Dashboard Web es la interfaz principal para monitorear el rendimiento del sistema completo.
 
