@@ -6,7 +6,10 @@ import {
   TrendingUp, 
   TrendingDown,
   Users,
-  DollarSign
+  DollarSign,
+  Activity,
+  BarChart3,
+  AlertTriangle
 } from 'lucide-react';
 
 const iconMap = {
@@ -14,53 +17,68 @@ const iconMap = {
   'check-circle': CheckCircle,
   clock: Clock,
   'trending-up': TrendingUp,
+  'trending-down': TrendingDown,
   users: Users,
-  dollar: DollarSign
+  dollar: DollarSign,
+  activity: Activity,
+  'bar-chart': BarChart3,
+  alert: AlertTriangle
 };
 
-const colorMap = {
-  blue: 'bg-blue-100 text-blue-600',
-  green: 'bg-green-100 text-green-600',
-  purple: 'bg-purple-100 text-purple-600',
-  orange: 'bg-orange-100 text-orange-600',
-  red: 'bg-red-100 text-red-600',
-  yellow: 'bg-yellow-100 text-yellow-600'
-};
-
-function KPICard({ title, value, subtitle, icon = 'phone', color = 'blue', trend }) {
+function KPICard({ title, value, subtitle, icon = 'phone', color = 'primary', trend }) {
   const Icon = iconMap[icon] || Phone;
-  const colorClass = colorMap[color] || colorMap.blue;
+  
+  // Map color prop to gradient classes
+  const colorClasses = {
+    primary: 'from-primary-500 to-primary-600',
+    secondary: 'from-secondary-500 to-secondary-600',
+    success: 'from-success-500 to-success-600',
+    warning: 'from-warning-500 to-warning-600',
+    danger: 'from-error-500 to-error-600',
+    info: 'from-info-500 to-info-600',
+    purple: 'from-purple-500 to-purple-600',
+    indigo: 'from-indigo-500 to-indigo-600'
+  };
+  
+  const gradientClass = colorClasses[color] || colorClasses.primary;
 
   return (
-    <div className="card hover:shadow-xl transition-shadow">
-      <div className="flex items-start justify-between">
+    <div className="card group relative overflow-hidden aspect-square flex flex-col p-3">
+      {/* Gradient background */}
+      <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${gradientClass}`}></div>
+      
+      <div className="flex items-start justify-between flex-1">
         <div className="flex-1">
-          <p className="text-sm font-medium text-gray-600 mb-2">{title}</p>
-          <p className="text-3xl font-bold text-gray-900 mb-1">{value}</p>
+          <p className="text-[0.7rem] font-medium text-gray-600 mb-1">{title}</p>
+          <p className="text-lg font-bold text-gray-900 mb-1">{value}</p>
           {subtitle && (
-            <p className="text-xs text-gray-500">{subtitle}</p>
+            <p className="text-[0.6rem] text-gray-500">{subtitle}</p>
           )}
         </div>
         
-        <div className={`p-3 rounded-lg ${colorClass}`}>
-          <Icon className="h-6 w-6" />
+        <div className={`p-1.5 rounded-md bg-gradient-to-br ${gradientClass} text-white`}>
+          <Icon className="h-3.5 w-3.5" />
         </div>
       </div>
 
       {trend && (
-        <div className="mt-4 pt-4 border-t border-gray-100">
-          <div className="flex items-center gap-1">
+        <div className="pt-1.5 border-t border-gray-100 mt-auto">
+          <div className="flex items-center gap-0.5">
             {trend === 'up' ? (
               <>
-                <TrendingUp className="h-4 w-4 text-green-600" />
-                <span className="text-xs font-medium text-green-600">
+                <div className="p-0.5 rounded-sm bg-green-100">
+                  <TrendingUp className="h-2.5 w-2.5 text-green-600" />
+                </div>
+                <span className="text-[0.6rem] font-medium text-green-600">
                   Objetivo alcanzado
                 </span>
               </>
             ) : (
               <>
-                <TrendingDown className="h-4 w-4 text-red-600" />
-                <span className="text-xs font-medium text-red-600">
+                <div className="p-0.5 rounded-sm bg-red-100">
+                  <TrendingDown className="h-2.5 w-2.5 text-red-600" />
+                </div>
+                <span className="text-[0.6rem] font-medium text-red-600">
                   Por debajo del objetivo
                 </span>
               </>

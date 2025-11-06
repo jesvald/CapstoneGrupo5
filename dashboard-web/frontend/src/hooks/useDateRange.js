@@ -2,14 +2,21 @@ import { useState, useCallback } from 'react';
 
 /**
  * Hook personalizado para manejar rangos de fechas
- * @param {number} defaultDays - Número de días por defecto (desde hoy hacia atrás)
+ * @param {number|null} defaultDays - Número de días por defecto (desde hoy hacia atrás), null for all time
  */
 function useDateRange(defaultDays = 30) {
   const getDefaultRange = useCallback((days) => {
-    const end = new Date();
-    const start = new Date();
-    start.setDate(start.getDate() - days);
-    return { start, end };
+    if (days === null || days === 'all') {
+      // Para "todo el tiempo", usamos un rango muy amplio
+      const start = new Date('2020-01-01'); // Fecha de inicio del sistema
+      const end = new Date('2030-12-31'); // Fecha futura lejana
+      return { start, end };
+    } else {
+      const end = new Date();
+      const start = new Date();
+      start.setDate(start.getDate() - days);
+      return { start, end };
+    }
   }, []);
 
   const { start, end } = getDefaultRange(defaultDays);

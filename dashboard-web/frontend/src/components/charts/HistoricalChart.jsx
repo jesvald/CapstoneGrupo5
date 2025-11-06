@@ -88,20 +88,20 @@ function HistoricalChart({ data }) {
         position: 'top',
         labels: {
           usePointStyle: true,
-          padding: 15,
+          padding: 8,
           font: {
-            size: 11
+            size: 9
           }
         }
       },
       tooltip: {
         backgroundColor: 'rgba(0, 0, 0, 0.8)',
-        padding: 12,
+        padding: 8,
         titleFont: {
-          size: 13
+          size: 11
         },
         bodyFont: {
-          size: 12
+          size: 10
         }
       }
     },
@@ -111,10 +111,11 @@ function HistoricalChart({ data }) {
         display: true,
         position: 'left',
         title: {
-          display: true,
-          text: 'Cantidad',
+          display: false, // Hide title to save space
+        },
+        ticks: {
           font: {
-            size: 11
+            size: 9
           }
         },
         beginAtZero: true
@@ -124,10 +125,11 @@ function HistoricalChart({ data }) {
         display: true,
         position: 'right',
         title: {
-          display: true,
-          text: 'Porcentaje (%)',
+          display: false, // Hide title to save space
+        },
+        ticks: {
           font: {
-            size: 11
+            size: 9
           }
         },
         beginAtZero: true,
@@ -135,12 +137,19 @@ function HistoricalChart({ data }) {
         grid: {
           drawOnChartArea: false
         }
+      },
+      x: {
+        ticks: {
+          font: {
+            size: 9
+          }
+        }
       }
     }
   };
 
   return (
-    <div style={{ height: '400px' }}>
+    <div style={{ height: '300px' }}>
       <Line data={chartData} options={options} />
     </div>
   );

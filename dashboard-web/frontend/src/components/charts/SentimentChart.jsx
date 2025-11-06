@@ -57,12 +57,15 @@ function SentimentChart({ data }) {
 
   const options = {
     responsive: true,
-    maintainAspectRatio: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         display: false
       },
       tooltip: {
+        bodyFont: {
+          size: 11
+        },
         callbacks: {
           label: function(context) {
             return `${context.label}: ${context.parsed.y}`;
@@ -74,7 +77,17 @@ function SentimentChart({ data }) {
       y: {
         beginAtZero: true,
         ticks: {
-          stepSize: 1
+          stepSize: 1,
+          font: {
+            size: 10
+          }
+        }
+      },
+      x: {
+        ticks: {
+          font: {
+            size: 10
+          }
         }
       }
     }

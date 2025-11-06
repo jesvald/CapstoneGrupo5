@@ -25,10 +25,10 @@ function PerformanceChart({ data }) {
           data.sinRespuesta || 0
         ],
         backgroundColor: [
-          'rgba(34, 197, 94, 0.8)',   // Verde
-          'rgba(251, 191, 36, 0.8)',  // Amarillo
-          'rgba(239, 68, 68, 0.8)',   // Rojo
-          'rgba(156, 163, 175, 0.8)'  // Gris
+          'rgba(34, 197, 94, 0.9)',   // Verde
+          'rgba(251, 191, 36, 0.9)',  // Amarillo
+          'rgba(239, 68, 68, 0.9)',   // Rojo
+          'rgba(156, 163, 175, 0.9)'  // Gris
         ],
         borderColor: [
           'rgba(34, 197, 94, 1)',
@@ -36,25 +36,40 @@ function PerformanceChart({ data }) {
           'rgba(239, 68, 68, 1)',
           'rgba(156, 163, 175, 1)'
         ],
-        borderWidth: 2
+        borderWidth: 2,
+        borderRadius: 6,
+        spacing: 2
       }
     ]
   };
 
   const options = {
     responsive: true,
-    maintainAspectRatio: true,
+    maintainAspectRatio: false,
+    cutout: '70%', // Makes it a donut instead of pie
     plugins: {
       legend: {
         position: 'bottom',
         labels: {
-          padding: 15,
+          padding: 10,
           font: {
-            size: 12
-          }
+            size: 11,
+            family: "'Inter', sans-serif"
+          },
+          usePointStyle: true,
+          pointStyle: 'circle',
+          boxWidth: 8
         }
       },
       tooltip: {
+        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+        titleColor: '#1f2937',
+        bodyColor: '#4b5563',
+        borderColor: '#e5e7eb',
+        borderWidth: 1,
+        padding: 8,
+        borderRadius: 6,
+        usePointStyle: true,
         callbacks: {
           label: function(context) {
             const label = context.label || '';
@@ -65,6 +80,12 @@ function PerformanceChart({ data }) {
           }
         }
       }
+    },
+    animation: {
+      animateRotate: true,
+      animateScale: true,
+      duration: 1000,
+      easing: 'easeOutQuart'
     }
   };
 
@@ -76,18 +97,18 @@ function PerformanceChart({ data }) {
 
   return (
     <div>
-      <div className="mb-6">
+      <div className="flex justify-center mb-6">
         <Doughnut data={chartData} options={options} />
       </div>
       
-      <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-100">
-        <div className="text-center">
+      <div className="grid grid-cols-2 gap-6 pt-4">
+        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 rounded-xl text-center">
           <p className="text-2xl font-bold text-gray-900">{total}</p>
-          <p className="text-xs text-gray-500 mt-1">Total de Llamadas</p>
+          <p className="text-sm text-gray-600 mt-1">Total de Llamadas</p>
         </div>
-        <div className="text-center">
+        <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-4 rounded-xl text-center">
           <p className="text-2xl font-bold text-green-600">{successRate}%</p>
-          <p className="text-xs text-gray-500 mt-1">Tasa de Éxito</p>
+          <p className="text-sm text-gray-600 mt-1">Tasa de Éxito</p>
         </div>
       </div>
     </div>
