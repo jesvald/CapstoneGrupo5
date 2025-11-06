@@ -278,35 +278,6 @@ Cumple con los requisitos
 - MySQL 8.0+
 - Git
 
-### Producción
-- Servidor Linux/Windows
-- 2GB RAM mínimo
-- 20GB espacio en disco
-- Conexión a internet estable
-
-## Próximos Pasos
-
-### Corto Plazo
-1. Implementar Microservicio ETL
-2. Integrar Agente de Voz IA
-3. Conectar todos los componentes
-4. Realizar pruebas de integración
-5. Deployar en ambiente de staging
-
-### Mediano Plazo
-1. Optimizar rendimiento del sistema
-2. Implementar exportación de reportes
-3. Agregar WebSockets para tiempo real
-4. Desarrollar módulo de gestión de proveedores
-5. Implementar análisis predictivo
-
-### Largo Plazo
-1. Escalabilidad horizontal
-2. Multi-tenancy
-3. API pública
-4. Dashboard móvil nativo
-5. Integración con más plataformas
-
 ## Equipo
 
 **Capstone Grupo 5**
