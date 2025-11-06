@@ -270,16 +270,8 @@ El modo desarrollo incluye:
    - Usar botón de "Actualizar" para forzar recarga
    - Verificar el auto-refresh (cada 5 minutos)
 
-## Contribución
 
-1. Seguir la metodología Kanban del proyecto
-2. Respetar la estructura de componentes
-3. Mantener consistencia en estilos
-4. Documentar componentes nuevos
-5. Realizar pruebas antes de commit
-
-
-## 👥 Equipo
+## Equipo
 
 Dashboard desarrollado por el Grupo 5 del Capstone para la optimización del Sistema de Licitaciones B2B - Wherex.
 

@@ -155,7 +155,7 @@ Authorization: Bearer <token>
 - created_at (TIMESTAMP)
 ```
 
-## 📊 Sistema de Caché
+## Sistema de Caché
 
 El backend implementa un sistema de caché en memoria para optimizar el rendimiento:
 
@@ -181,7 +181,7 @@ Niveles de log: error, warn, info, http, verbose, debug, silly
 - JWT con expiración configurable
 - CORS configurado
 
-## 🚦 Health Check
+## Health Check
 
 ```bash
 GET /health
@@ -196,14 +196,6 @@ Respuesta:
   "uptime": 12345
 }
 ```
-
-## Contribución
-
-1. Seguir la metodología Kanban definida en el proyecto
-2. Respetar los límites WIP
-3. Incluir pruebas unitarias
-4. Documentar cambios significativos
-5. Realizar revisión por pares
 
 ## Equipo
 
