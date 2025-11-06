@@ -8,7 +8,7 @@ Este proyecto aborda la problemática de la baja tasa de oferta en la plataforma
 
 ### Problema Identificado
 
-En la plataforma actual, solo el **39% de las licitaciones resultan en transacciones exitosas**, principalmente debido a:
+En la plataforma actual, existe un problema con la tasa de oferta por parte de los proveedores, principalmente debido a:
 - Proceso manual e ineficiente de contacto con proveedores
 - Baja tasa de respuesta de los proveedores
 - Dificultad para calificar rápidamente el interés real
