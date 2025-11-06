@@ -181,7 +181,7 @@ async function getHistoricalPerformance(startDate, endDate, groupBy = 'day') {
 
     const sql = `
       SELECT 
-        DATE_FORMAT(fecha_llamada, ?) as periodo,
+        DATE_FORMAT(fecha_llamada, '${dateFormat}') as periodo,
         COUNT(*) as total_llamadas,
         SUM(CASE WHEN contacto_exitoso = 1 THEN 1 ELSE 0 END) as contactos_exitosos,
         SUM(CASE WHEN conversion_oferta = 1 THEN 1 ELSE 0 END) as conversiones,
@@ -192,7 +192,7 @@ async function getHistoricalPerformance(startDate, endDate, groupBy = 'day') {
       ORDER BY periodo ASC
     `;
     
-    const results = await query(sql, [dateFormat, startDate, endDate]);
+    const results = await query(sql, [startDate, endDate]);
 
     const historicalData = results.map(row => ({
       periodo: row.periodo,
@@ -229,19 +229,26 @@ async function getTopProviders(startDate, endDate, limit = 10) {
         COUNT(l.id) as total_llamadas,
         SUM(CASE WHEN l.contacto_exitoso = 1 THEN 1 ELSE 0 END) as contactos_exitosos,
         SUM(CASE WHEN l.conversion_oferta = 1 THEN 1 ELSE 0 END) as ofertas_generadas,
-        AVG(l.duracion_segundos) as duracion_promedio
+        CASE WHEN COUNT(l.id) > 0 THEN COALESCE(AVG(l.duracion_segundos), 0) ELSE 0 END as duracion_promedio
       FROM proveedores p
-      LEFT JOIN llamadas l ON p.id = l.proveedor_id
-      WHERE l.fecha_llamada BETWEEN ? AND ?
+      LEFT JOIN llamadas l ON p.id = l.proveedor_id AND l.fecha_llamada BETWEEN ? AND ?
       GROUP BY p.id, p.nombre, p.rubro
       ORDER BY ofertas_generadas DESC, contactos_exitosos DESC
-      LIMIT ?
     `;
     
-    const results = await query(sql, [startDate, endDate, limit]);
+    // Ensure all parameters are properly formatted
+    // Format dates to MySQL DATETIME format (YYYY-MM-DD HH:MM:SS)
+    const mysqlFormattedStart = new Date(startDate).toISOString().slice(0, 19).replace('T', ' ');
+    const mysqlFormattedEnd = new Date(endDate).toISOString().slice(0, 19).replace('T', ' ');
+    
+    const results = await query(sql, [mysqlFormattedStart, mysqlFormattedEnd]);
+    
+    // Limit results in JavaScript instead of using MySQL LIMIT to avoid parameter issues
+    const parsedLimit = Math.max(1, Math.min(100, parseInt(limit) || 10)); // Ensure limit is within 1-100 range
+    const limitedResults = results.slice(0, parsedLimit);
 
-    logger.info('Top proveedores calculados', { count: results.length });
-    return results;
+    logger.info('Top proveedores calculados', { count: limitedResults.length });
+    return limitedResults;
   } catch (error) {
     logger.error('Error al obtener top proveedores', { error: error.message });
     throw error;
