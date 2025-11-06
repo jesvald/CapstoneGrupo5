@@ -258,10 +258,8 @@ Cumple con los requisitos
 ## Métricas de Éxito
 
 ### KPIs del Proyecto
-- **Tasa de Adjudicación**: 39% → 65% (Objetivo)
 - **Tasa de Contacto Exitoso**: >50%
 - **Tasa de Conversión a Oferta**: >20%
-- **Tiempo de Respuesta**: <24 horas
 - **Satisfacción de Proveedores**: >4/5
 
 ### Métricas Técnicas
