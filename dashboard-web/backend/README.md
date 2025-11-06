@@ -2,7 +2,7 @@
 
 Backend del Dashboard de Monitoreo para el Sistema de Invitaciones y Ofertas en la Plataforma de Licitaciones B2B.
 
-## 🚀 Tecnologías
+## Tecnologías
 
 - **Node.js** v18+
 - **Express.js** - Framework web
@@ -11,13 +11,13 @@ Backend del Dashboard de Monitoreo para el Sistema de Invitaciones y Ofertas en 
 - **Winston** - Logging
 - **Node-Cache** - Caché en memoria
 
-## 📋 Requisitos Previos
+## Requisitos Previos
 
 - Node.js 18.0.0 o superior
 - npm 9.0.0 o superior
 - MySQL 8.0 o superior
 
-## 🛠️ Instalación
+## Instalación
 
 1. Instalar dependencias:
 ```bash
@@ -48,7 +48,7 @@ JWT_SECRET=tu_secreto_jwt
 mkdir logs
 ```
 
-## 🎯 Uso
+## Uso
 
 ### Desarrollo
 ```bash
@@ -65,7 +65,7 @@ npm start
 npm test
 ```
 
-## 📡 API Endpoints
+## API Endpoints
 
 ### Autenticación
 
@@ -99,7 +99,7 @@ curl -X GET "http://localhost:3001/api/metrics/kpis?startDate=2024-01-01&endDate
   -H "Authorization: Bearer your_jwt_token"
 ```
 
-## 🔐 Autenticación y Autorización
+## Autenticación y Autorización
 
 El sistema implementa autenticación basada en JWT y control de acceso basado en roles (RBAC).
 
@@ -116,7 +116,7 @@ Incluir el token JWT en el header Authorization:
 Authorization: Bearer <token>
 ```
 
-## 🗄️ Estructura de la Base de Datos
+## Estructura de la Base de Datos
 
 ### Tabla: usuarios
 ```sql
@@ -163,7 +163,7 @@ El backend implementa un sistema de caché en memoria para optimizar el rendimie
 - **Endpoints cacheados**: Todos los endpoints de métricas
 - **Limpieza**: Automática por TTL o manual vía endpoint
 
-## 📝 Logging
+## Logging
 
 Los logs se almacenan en el directorio `/logs`:
 
@@ -172,7 +172,7 @@ Los logs se almacenan en el directorio `/logs`:
 
 Niveles de log: error, warn, info, http, verbose, debug, silly
 
-## 🔒 Seguridad
+## Seguridad
 
 - Helmet.js para headers de seguridad
 - Rate limiting para prevenir ataques de fuerza bruta
@@ -197,7 +197,7 @@ Respuesta:
 }
 ```
 
-## 🤝 Contribución
+## Contribución
 
 1. Seguir la metodología Kanban definida en el proyecto
 2. Respetar los límites WIP
@@ -205,11 +205,7 @@ Respuesta:
 4. Documentar cambios significativos
 5. Realizar revisión por pares
 
-## 📄 Licencia
-
-ISC - Capstone Grupo 5
-
-## 👥 Equipo
+## Equipo
 
 Proyecto desarrollado por el Grupo 5 del Capstone para la optimización del Sistema de Licitaciones B2B.
 
