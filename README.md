@@ -2,9 +2,9 @@
 
 Proyecto Capstone Grupo 5 - Sistema integral para la optimización de licitaciones en plataforma B2B mediante agentes de voz con IA.
 
-## 📋 Descripción del Proyecto
+## Descripción del Proyecto
 
-Este proyecto aborda la problemática de la baja tasa de adjudicación (39%) en la plataforma de licitaciones B2B Wherex, con el objetivo de elevarla al 65% mediante la automatización inteligente del contacto inicial con proveedores.
+Este proyecto aborda la problemática de la baja tasa de oferta en la plataforma de licitaciones B2B Wherex, con el objetivo de elevarla mediante la automatización inteligente del contacto inicial con proveedores.
 
 ### Problema Identificado
 
@@ -29,26 +29,26 @@ Sistema inteligente compuesto por tres componentes principales:
    - Análisis de sentimiento en tiempo real
    - Registro de interacciones
 
-3. **Dashboard Web de Monitoreo** (React + Node.js) ✅ **IMPLEMENTADO**
+3. **Dashboard Web de Monitoreo** (React + Node.js) **IMPLEMENTADO**
    - Visualización de métricas en tiempo real
    - KPIs de rendimiento
    - Análisis de sentimiento
    - Sistema de alertas
    - Reportes históricos
 
-## 🎯 Objetivos del Proyecto
+## Objetivos del Proyecto
 
 ### Objetivo General
-Optimizar el sistema de invitaciones y ofertas de la plataforma de licitaciones B2B mediante la automatización con agentes de voz IA, aumentando la tasa de adjudicación del 39% al 65%.
+Optimizar el sistema de invitaciones y ofertas de la plataforma de licitaciones Wherex mediante la automatización con agentes de voz IA, aumentando la tasa de oferta
 
 ### Objetivos Específicos
-1. ✅ Desarrollar un microservicio ETL para procesamiento de datos
-2. ✅ Implementar agente de voz con IA para contacto automatizado
-3. ✅ **Crear dashboard web para monitoreo y análisis de métricas**
-4. ✅ Integrar los tres componentes en un sistema cohesivo
-5. ✅ Medir y validar el aumento en la tasa de adjudicación
+1. Desarrollar un microservicio ETL para procesamiento de datos
+2. Implementar agente de voz con IA para contacto automatizado
+3. **Crear dashboard web para monitoreo y análisis de métricas**
+4. Integrar los tres componentes en un sistema cohesivo
+5. Medir y validar el aumento en la tasa de adjudicación
 
-## 🏗️ Arquitectura del Sistema
+## Arquitectura del Sistema
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -91,7 +91,7 @@ Optimizar el sistema de invitaciones y ofertas de la plataforma de licitaciones 
                          │
                          ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│              DASHBOARD WEB ✅ IMPLEMENTADO                      │
+│              DASHBOARD WEB IMPLEMENTADO                      │
 │           (React + Node.js + Express)                          │
 │                                                                 │
 │  Frontend:                    Backend:                         │
@@ -103,25 +103,25 @@ Optimizar el sistema de invitaciones y ofertas de la plataforma de licitaciones 
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-## 📊 Dashboard de Monitoreo (Implementado)
+## Dashboard de Monitoreo (Implementado)
 
 El Dashboard Web es la interfaz principal para monitorear el rendimiento del sistema completo.
 
 ### Características Principales
 
-#### 🔐 Autenticación y Seguridad
+#### Autenticación y Seguridad
 - Login con JWT
 - Control de acceso basado en roles (Admin, Manager, Analyst)
 - Sesiones persistentes
 - Rate limiting y protección contra ataques
 
-#### 📈 KPIs Principales
+#### KPIs Principales
 - **Total de Llamadas**: Volumen diario/semanal/mensual
 - **Contacto Exitoso**: % de llamadas que lograron contacto (Meta: >50%)
 - **Duración Promedio**: Tiempo promedio de conversación
 - **Conversión a Oferta**: % que generaron ofertas (Meta: >20%)
 
-#### 📊 Visualizaciones
+#### Visualizaciones
 1. **Desempeño Operativo** (Gráfico Circular)
    - Completadas vs Ocupadas vs Fallidas
    
@@ -137,15 +137,15 @@ El Dashboard Web es la interfaz principal para monitorear el rendimiento del sis
    - Ranking por conversión
    - Métricas individuales
 
-#### 🔔 Sistema de Alertas
+#### Sistema de Alertas
 - Alertas automáticas basadas en umbrales
 - Tres niveles: Info, Warning, Critical
 - Ejemplos:
-  - ⚠️ Tasa de contacto <50%
-  - 🚨 Tasa de conversión <20%
-  - ℹ️ Volumen de llamadas bajo
+  - Tasa de contacto <50%
+  - Tasa de conversión <20%
+  - ℹVolumen de llamadas bajo
 
-#### 🎛️ Filtros y Análisis
+####  Filtros y Análisis
 - Rangos de fecha personalizados
 - Presets: Hoy, 7/30/90 días, Este mes
 - Agrupación temporal: Hora/Día/Semana/Mes
@@ -234,37 +234,9 @@ CapstoneGrupo5/
     └── README.md
 ```
 
-## 🚀 Estado de Implementación
 
-| Componente | Estado | Progreso |
-|-----------|--------|----------|
-| Dashboard Web - Backend | ✅ Completo | 100% |
-| Dashboard Web - Frontend | ✅ Completo | 100% |
-| Base de Datos MySQL | ✅ Completo | 100% |
-| Microservicio ETL | ⏳ Pendiente | 0% |
-| Agente de Voz IA | ⏳ Pendiente | 0% |
-| Integración Completa | ⏳ Pendiente | 33% |
 
-### ✅ Componentes Completados
-
-#### Dashboard Web de Monitoreo
-- [x] Arquitectura backend con Node.js + Express
-- [x] API RESTful con endpoints de métricas
-- [x] Sistema de autenticación JWT
-- [x] Middleware de autorización RBAC
-- [x] Servicios de analytics y KPIs
-- [x] Sistema de caché y logging
-- [x] Rate limiting y seguridad
-- [x] Esquema completo de base de datos
-- [x] Frontend React con Vite
-- [x] Componentes de visualización (gráficos)
-- [x] Sistema de filtros temporales
-- [x] Panel de alertas
-- [x] Diseño responsive
-- [x] Auto-refresh
-- [x] Documentación completa
-
-## 🎯 Metodología de Desarrollo
+## Metodología de Desarrollo
 
 ### Kanban
 El proyecto utiliza metodología Kanban con las siguientes columnas:
@@ -276,14 +248,14 @@ El proyecto utiliza metodología Kanban con las siguientes columnas:
 - **Completadas**: Tareas terminadas
 
 ### Definition of Done
-✅ Código funcional y testeado
-✅ Pruebas unitarias pasando
-✅ Documentación actualizada
-✅ Revisión por pares aprobada
-✅ Sin errores de linter
-✅ Cumple con los requisitos
+Código funcional y testeado
+Pruebas unitarias pasando
+Documentación actualizada
+Revisión por pares aprobada
+Sin errores de linter
+Cumple con los requisitos
 
-## 📊 Métricas de Éxito
+## Métricas de Éxito
 
 ### KPIs del Proyecto
 - **Tasa de Adjudicación**: 39% → 65% (Objetivo)
@@ -312,7 +284,7 @@ El proyecto utiliza metodología Kanban con las siguientes columnas:
 - 20GB espacio en disco
 - Conexión a internet estable
 
-## 📝 Próximos Pasos
+## Próximos Pasos
 
 ### Corto Plazo
 1. Implementar Microservicio ETL
@@ -335,29 +307,11 @@ El proyecto utiliza metodología Kanban con las siguientes columnas:
 4. Dashboard móvil nativo
 5. Integración con más plataformas
 
-## 🤝 Contribución
-
-Ver [CONTRIBUTING.md](./CONTRIBUTING.md) para detalles sobre el proceso de contribución.
-
-## 📄 Licencia
-
-ISC License - Ver [LICENSE](./LICENSE) para más detalles.
-
-## 👥 Equipo
+## Equipo
 
 **Capstone Grupo 5**
 
 Proyecto desarrollado como parte del Capstone para la optimización del Sistema de Licitaciones B2B de Wherex.
 
-## 📞 Contacto
-
-Para más información sobre el proyecto:
-- Revisar documentación en `/dashboard-web/`
-- Consultar `context.md` para especificaciones detalladas
-- Crear un issue en el repositorio
-
----
-
-**Versión**: 1.0.0  
-**Última actualización**: Noviembre 2024  
-**Estado**: Dashboard Web Implementado ✅
+**Versión**: 1.1.0  
+**Última actualización**: Noviembre 2025
