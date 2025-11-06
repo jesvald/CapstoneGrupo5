@@ -2,7 +2,7 @@
 
 Esta guía te ayudará a poner en marcha el Dashboard de Monitoreo en menos de 10 minutos.
 
-## ⚡ Instalación Rápida
+## Instalación Rápida
 
 ### Paso 1: Requisitos Previos
 
@@ -88,7 +88,7 @@ RATE_LIMIT_MAX_REQUESTS=100
 LOG_LEVEL=info
 ```
 
-**⚠️ IMPORTANTE**: Reemplaza `tu_contraseña_mysql` con tu contraseña real de MySQL.
+**IMPORTANTE**: Reemplaza `tu_contraseña_mysql` con tu contraseña real de MySQL.
 
 4. **Crear directorio de logs**:
 ```bash
@@ -102,8 +102,8 @@ npm run dev
 
 Deberías ver:
 ```
-🚀 Servidor iniciado en puerto 3001
-📊 Dashboard Backend API corriendo en http://localhost:3001
+Servidor iniciado en puerto 3001
+Dashboard Backend API corriendo en http://localhost:3001
 ✓ Sistema listo para recibir peticiones
 ```
 
@@ -145,9 +145,9 @@ Email: admin@dashboard.com
 Contraseña: Admin123!
 ```
 
-¡Listo! 🎉 Ya deberías estar viendo el Dashboard.
+¡Listo! Ya deberías estar viendo el Dashboard.
 
-## 🔍 Verificación
+## Verificación
 
 ### Backend funcionando correctamente
 
@@ -171,12 +171,12 @@ Deberías ver:
 Si ves el dashboard con datos, ¡todo funciona!
 
 Si ves errores, verifica:
-1. ✅ Backend está corriendo en puerto 3001
-2. ✅ MySQL está corriendo
-3. ✅ Credenciales de BD son correctas en .env
-4. ✅ No hay errores en la consola del navegador
+1. Backend está corriendo en puerto 3001
+2. MySQL está corriendo
+3. Credenciales de BD son correctas en .env
+4. No hay errores en la consola del navegador
 
-## 🐛 Solución de Problemas Comunes
+## Solución de Problemas Comunes
 
 ### Error: "Cannot connect to MySQL"
 
@@ -234,7 +234,7 @@ npm install
 2. Vuelve a iniciar sesión
 3. El token tiene una duración de 24 horas
 
-## 📊 Verificar Datos de Ejemplo
+## Verificar Datos de Ejemplo
 
 El script de base de datos incluye datos de ejemplo. Para verificar:
 
@@ -252,7 +252,7 @@ SELECT * FROM proveedores;
 SELECT * FROM llamadas;
 ```
 
-## 🔄 Reiniciar el Sistema
+## Reiniciar el Sistema
 
 ### Detener todo
 
@@ -273,7 +273,7 @@ cd dashboard-web/frontend
 npm run dev
 ```
 
-## 🚀 Modo Producción
+## Modo Producción
 
 ### Backend
 
@@ -292,7 +292,7 @@ npm run preview
 
 Los archivos de producción estarán en `frontend/dist/`
 
-## 📝 Siguiente Pasos
+## Siguiente Pasos
 
 Una vez que el dashboard esté funcionando:
 
@@ -313,7 +313,7 @@ Una vez que el dashboard esté funcionando:
    - Modifica los colores en `frontend/src/styles/index.css`
    - Ajusta los umbrales de alertas en `backend/src/services/analytics_service.js`
 
-## 🆘 ¿Necesitas Ayuda?
+## ¿Necesitas Ayuda?
 
 1. **Revisa los logs**:
    - Backend: `dashboard-web/backend/logs/`
@@ -329,25 +329,7 @@ Una vez que el dashboard esté funcionando:
    - Backend: `http://localhost:3001/health`
    - Frontend: `http://localhost:3000`
 
-## ✅ Checklist de Instalación
 
-- [ ] Node.js y npm instalados
-- [ ] MySQL instalado y corriendo
-- [ ] Base de datos creada con script SQL
-- [ ] Backend: dependencias instaladas
-- [ ] Backend: archivo .env configurado
-- [ ] Backend: directorio logs creado
-- [ ] Backend: servidor corriendo en puerto 3001
-- [ ] Frontend: dependencias instaladas
-- [ ] Frontend: aplicación corriendo en puerto 3000
-- [ ] Dashboard accesible en navegador
-- [ ] Login exitoso con credenciales de prueba
-- [ ] Datos de ejemplo visibles en el dashboard
 
----
 
-**¡Felicitaciones! 🎉**  
-Si completaste todos los pasos, el Dashboard de Monitoreo ya está funcionando correctamente.
-
-Para más información, consulta la documentación completa en los archivos README.
 

@@ -2,9 +2,9 @@
 
 Sistema completo de monitoreo y visualización para la optimización del sistema de invitaciones y ofertas en la plataforma de licitaciones B2B Wherex.
 
-## 📊 Descripción del Proyecto
+## Descripción del Proyecto
 
-El Dashboard de Monitoreo es parte de una solución integral que busca aumentar la tasa de adjudicación de licitaciones del 39% al 65% mediante el uso de agentes de voz con IA que califican automáticamente el interés de los proveedores.
+El Dashboard de Monitoreo es parte de una solución integral que busca aumentar la tasa de oferta de licitaciones mediante el uso de agentes de voz con IA que califican automáticamente el interés de los proveedores.
 
 Este dashboard proporciona:
 - **Visualización en tiempo real** de métricas de rendimiento
@@ -13,7 +13,7 @@ Este dashboard proporciona:
 - **Alertas automáticas** basadas en umbrales críticos
 - **Reportes históricos** para análisis de tendencias
 
-## 🏗️ Arquitectura del Sistema
+## Arquitectura del Sistema
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -41,7 +41,7 @@ Este dashboard proporciona:
                     └─────────────────┘
 ```
 
-## 🚀 Inicio Rápido
+## Inicio Rápido
 
 ### Requisitos Previos
 
@@ -95,7 +95,7 @@ Usuario: admin@dashboard.com
 Contraseña: Admin123!
 ```
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 dashboard-web/
@@ -137,9 +137,9 @@ dashboard-web/
 └── README.md                     # Este archivo
 ```
 
-## 🎯 Características Principales
+## Características Principales
 
-### 🔐 Autenticación y Autorización
+### Autenticación y Autorización
 - Sistema de login con JWT
 - Control de acceso basado en roles (RBAC)
   - **Admin**: Acceso completo
@@ -148,13 +148,13 @@ dashboard-web/
 - Sesiones persistentes
 - Rate limiting para seguridad
 
-### 📊 KPIs y Métricas
+### KPIs y Métricas
 - **Total de Llamadas**: Volumen de llamadas realizadas
 - **Contacto Exitoso**: % de llamadas que lograron contacto
 - **Duración Promedio**: Tiempo promedio de conversación
 - **Conversión a Oferta**: % de llamadas que generaron ofertas
 
-### 📈 Visualizaciones
+### Visualizaciones
 1. **Desempeño Operativo** (Gráfico Circular)
    - Llamadas completadas
    - Llamadas ocupadas
@@ -175,19 +175,19 @@ dashboard-web/
    - Métricas por proveedor
    - Tasas de conversión
 
-### 🎛️ Filtros y Análisis
+### Filtros y Análisis
 - Filtros de fecha con presets
 - Análisis por períodos personalizados
 - Agrupación temporal (hora/día/semana/mes)
 - Exportación de datos (futuro)
 
-### 🔔 Sistema de Alertas
+### Sistema de Alertas
 - Alertas automáticas basadas en umbrales
 - Tres niveles de severidad
 - Notificaciones en tiempo real
 - Panel de alertas descartables
 
-### ⚡ Optimizaciones
+### Optimizaciones
 - Auto-refresh cada 5 minutos
 - Sistema de caché (TTL 5 minutos)
 - Lazy loading de componentes
@@ -195,7 +195,7 @@ dashboard-web/
 - Compresión de respuestas
 - Rate limiting
 
-## 🔧 Configuración
+## Configuración
 
 ### Variables de Entorno - Backend
 
@@ -232,7 +232,7 @@ RATE_LIMIT_MAX_REQUESTS=100
 VITE_API_BASE_URL=http://localhost:3001/api
 ```
 
-## 📡 API Endpoints
+## API Endpoints
 
 ### Autenticación
 ```
@@ -260,7 +260,7 @@ DELETE /api/metrics/cache         - Limpiar caché (Admin)
 ?limit=10
 ```
 
-## 🗄️ Base de Datos
+## Base de Datos
 
 ### Tablas Principales
 
@@ -292,7 +292,7 @@ Agregaciones precomputadas para optimizar consultas
 - `v_top_proveedores`: Vista de top proveedores
 - `sp_actualizar_metricas_diarias`: Procedimiento para actualizar métricas
 
-## 🧪 Testing
+## Testing
 
 ### Backend
 ```bash
@@ -306,7 +306,7 @@ cd frontend
 npm test
 ```
 
-## 📊 Metodología de Desarrollo
+## Metodología de Desarrollo
 
 El proyecto sigue la metodología **Kanban** con las siguientes columnas:
 - Backlog
@@ -319,13 +319,13 @@ El proyecto sigue la metodología **Kanban** con las siguientes columnas:
 **Límite WIP**: Máximo 6 tareas en desarrollo simultáneamente
 
 **Definition of Done**:
-- ✅ Código funcional
-- ✅ Pruebas unitarias
-- ✅ Documentación actualizada
-- ✅ Revisión por pares
-- ✅ Sin linter errors
+- Código funcional
+- Pruebas unitarias
+- Documentación actualizada
+- Revisión por pares
+- Sin linter errors
 
-## 🚀 Deployment
+## Deployment
 
 ### Backend
 
@@ -349,7 +349,7 @@ npm run build
 docker-compose up -d
 ```
 
-## 🔒 Seguridad
+## Seguridad
 
 - Helmet.js para headers seguros
 - Rate limiting contra brute force
@@ -359,7 +359,7 @@ docker-compose up -d
 - CORS configurado
 - SQL injection protection
 
-## 📈 Métricas de Negocio
+## Métricas de Negocio
 
 ### Objetivo del Proyecto
 Aumentar la tasa de adjudicación de **39% a 65%**
@@ -370,7 +370,7 @@ Aumentar la tasa de adjudicación de **39% a 65%**
 - Duración promedio de llamada: **2-5 minutos**
 - Sentimiento positivo: **>60%**
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Problemas Comunes
 
@@ -400,9 +400,9 @@ lsof -ti:3000 | xargs kill -9
 - Revisar logs en backend/logs/
 - Verificar conexión a la base de datos
 
-## 📝 Roadmap
+## Roadmap
 
-### Fase 1 (Actual) ✅
+### Fase 1 (Actual) 
 - [x] Sistema de autenticación
 - [x] Dashboard principal con KPIs
 - [x] Visualizaciones básicas
@@ -423,7 +423,7 @@ lsof -ti:3000 | xargs kill -9
 - [ ] API pública documentada
 - [ ] Multi-tenancy
 
-## 🤝 Contribución
+## Contribución
 
 1. Fork el proyecto
 2. Crear una rama feature (`git checkout -b feature/AmazingFeature`)
@@ -431,18 +431,7 @@ lsof -ti:3000 | xargs kill -9
 4. Push a la rama (`git push origin feature/AmazingFeature`)
 5. Abrir un Pull Request
 
-## 📞 Soporte
-
-Para soporte o consultas:
-- Revisar la documentación en `/backend/README.md` y `/frontend/README.md`
-- Crear un issue en el repositorio
-- Contactar al equipo de desarrollo
-
-## 📄 Licencia
-
-ISC License - Capstone Grupo 5
-
-## 👥 Equipo
+## Equipo
 
 Dashboard desarrollado por el **Grupo 5 del Capstone** para la optimización del Sistema de Licitaciones B2B de Wherex.
 
@@ -454,11 +443,6 @@ Dashboard desarrollado por el **Grupo 5 del Capstone** para la optimización del
 
 ---
 
-**Versión**: 1.0.0  
-**Última actualización**: Noviembre 2024
-
-Para más detalles técnicos, consultar:
-- [Backend README](./backend/README.md)
-- [Frontend README](./frontend/README.md)
-- [Database Schema](./backend/database_schema.sql)
+**Versión**: 1.1.0  
+**Última actualización**: Noviembre 2025
 
