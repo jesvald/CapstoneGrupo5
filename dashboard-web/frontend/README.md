@@ -2,7 +2,7 @@
 
 Frontend del Dashboard de Monitoreo construido con React y Vite.
 
-## 🚀 Tecnologías
+## Tecnologías
 
 - **React** 18.2+ - Librería de UI
 - **Vite** - Build tool y dev server
@@ -13,13 +13,13 @@ Frontend del Dashboard de Monitoreo construido con React y Vite.
 - **Lucide React** - Iconos
 - **date-fns** - Manipulación de fechas
 
-## 📋 Requisitos Previos
+## Requisitos Previos
 
 - Node.js 18.0.0 o superior
 - npm 9.0.0 o superior
 - Backend corriendo en `http://localhost:3001`
 
-## 🛠️ Instalación
+## Instalación
 
 1. Instalar dependencias:
 ```bash
@@ -33,7 +33,7 @@ Crear archivo `.env` en la raíz del frontend:
 VITE_API_BASE_URL=http://localhost:3001/api
 ```
 
-## 🎯 Uso
+## Uso
 
 ### Desarrollo
 ```bash
@@ -57,7 +57,7 @@ npm run preview
 npm run lint
 ```
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 frontend/
@@ -94,7 +94,7 @@ frontend/
 └── package.json
 ```
 
-## 🎨 Características
+## Características
 
 ### Autenticación
 - Sistema de login con JWT
@@ -136,7 +136,7 @@ frontend/
 - Notificaciones toast
 - Animaciones y transiciones suaves
 
-## 🔐 Autenticación
+## Autenticación
 
 ### Credenciales de Prueba
 ```
@@ -149,7 +149,7 @@ Password: Admin123!
 - **Manager**: Acceso a todas las métricas
 - **Analyst**: Solo lectura
 
-## 🎨 Componentes Principales
+## Componentes Principales
 
 ### KPICard
 Tarjeta para mostrar KPIs con íconos y tendencias.
@@ -196,7 +196,7 @@ Gráfico de líneas para datos históricos.
 <HistoricalChart data={historicalData} />
 ```
 
-## 🔧 Configuración de API
+## Configuración de API
 
 El servicio de API está configurado en `src/services/api_service.js`:
 
@@ -218,7 +218,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001
 - `GET /metrics/providers` - Top proveedores
 - `GET /metrics/alerts` - Alertas del sistema
 
-## 🎨 Personalización de Estilos
+## Personalización de Estilos
 
 Las variables CSS están definidas en `src/styles/index.css`:
 
@@ -232,14 +232,14 @@ Las variables CSS están definidas en `src/styles/index.css`:
 }
 ```
 
-## 📱 Responsive Design
+## Responsive Design
 
 El dashboard está optimizado para múltiples dispositivos:
 - **Desktop**: 1400px+ (vista completa)
 - **Tablet**: 768px - 1400px (grid adaptado)
 - **Mobile**: <768px (vista móvil)
 
-## 🚀 Optimizaciones
+## Optimizaciones
 
 - **Code Splitting**: Rutas lazy-loaded
 - **Memoización**: Componentes optimizados con React.memo
@@ -247,7 +247,7 @@ El dashboard está optimizado para múltiples dispositivos:
 - **Compresión**: Assets comprimidos en build
 - **Tree Shaking**: Eliminación de código no usado
 
-## 🐛 Debugging
+## Debugging
 
 ### Modo Desarrollo
 El modo desarrollo incluye:
@@ -270,7 +270,7 @@ El modo desarrollo incluye:
    - Usar botón de "Actualizar" para forzar recarga
    - Verificar el auto-refresh (cada 5 minutos)
 
-## 🤝 Contribución
+## Contribución
 
 1. Seguir la metodología Kanban del proyecto
 2. Respetar la estructura de componentes
@@ -278,15 +278,9 @@ El modo desarrollo incluye:
 4. Documentar componentes nuevos
 5. Realizar pruebas antes de commit
 
-## 📄 Licencia
-
-ISC - Capstone Grupo 5
 
 ## 👥 Equipo
 
 Dashboard desarrollado por el Grupo 5 del Capstone para la optimización del Sistema de Licitaciones B2B - Wherex.
 
----
-
-Para más información sobre el backend, consultar `dashboard-web/backend/README.md`
 
