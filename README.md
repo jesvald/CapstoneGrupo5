@@ -29,7 +29,7 @@ Sistema inteligente compuesto por tres componentes principales:
    - Análisis de sentimiento en tiempo real
    - Registro de interacciones
 
-3. **Dashboard Web de Monitoreo** (React + Node.js) **IMPLEMENTADO**
+3. **Dashboard Web de Monitoreo** (React + Node.js)
    - Visualización de métricas en tiempo real
    - KPIs de rendimiento
    - Análisis de sentimiento
