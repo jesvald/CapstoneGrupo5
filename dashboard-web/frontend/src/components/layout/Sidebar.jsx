@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard,
   BarChart3,
@@ -13,16 +14,18 @@ import {
 } from 'lucide-react';
 
 function Sidebar({ isOpen, currentUser }) {
+  const location = useLocation();
+
   const menuItems = [
-    { icon: LayoutDashboard, label: 'Dashboard', active: true },
-    { icon: Activity, label: 'Actividad', active: false },
-    { icon: BarChart3, label: 'Métricas', active: false },
-    { icon: PieChart, label: 'Análisis', active: false },
-    { icon: Phone, label: 'Llamadas', active: false },
-    { icon: Users, label: 'Proveedores', active: false },
-    { icon: FileText, label: 'Reportes', active: false },
-    { icon: TrendingUp, label: 'Rendimiento', active: false },
-    { icon: Settings, label: 'Configuración', active: false, admin: true }
+    { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard' },
+    { icon: Activity, label: 'Actividad', path: '/activity' },
+    { icon: BarChart3, label: 'Métricas', path: '/metrics' },
+    { icon: PieChart, label: 'Análisis', path: '/analysis' },
+    { icon: Phone, label: 'Llamadas', path: '/calls' },
+    { icon: Users, label: 'Proveedores', path: '/providers' },
+    { icon: FileText, label: 'Reportes', path: '/reports' },
+    { icon: TrendingUp, label: 'Rendimiento', path: '/performance' },
+    { icon: Settings, label: 'Configuración', path: '/settings', admin: true }
   ];
 
   // Filtrar items según el rol
@@ -41,18 +44,19 @@ function Sidebar({ isOpen, currentUser }) {
           <ul className="space-y-1">
             {filteredItems.map((item, index) => {
               const Icon = item.icon;
+              const isActive = location.pathname === item.path;
               return (
                 <li key={index}>
-                  <a
-                    href="#"
-                    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${item.active
+                  <Link
+                    to={item.path}
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive
                       ? 'bg-primary-500 text-white shadow-md'
                       : 'text-neutral-300 hover:bg-neutral-700 hover:text-white'
                       }`}
                   >
                     <Icon className="h-5 w-5" />
                     <span className="font-medium">{item.label}</span>
-                  </a>
+                  </Link>
                 </li>
               );
             })}

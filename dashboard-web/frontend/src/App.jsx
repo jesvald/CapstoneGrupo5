@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import NotFoundPage from './pages/NotFoundPage';
+import PlaceholderPage from './pages/PlaceholderPages';
 
 // Services
 import { setAuthToken, getCurrentUser } from './services/api_service';
@@ -70,32 +71,60 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route 
-            path="/login" 
+          <Route
+            path="/login"
             element={
               isAuthenticated ? (
                 <Navigate to="/dashboard" replace />
               ) : (
                 <LoginPage onLogin={handleLogin} />
               )
-            } 
+            }
           />
-          <Route 
-            path="/dashboard" 
+          <Route
+            path="/dashboard"
             element={
               isAuthenticated ? (
-                <DashboardPage 
-                  currentUser={currentUser} 
-                  onLogout={handleLogout} 
+                <DashboardPage
+                  currentUser={currentUser}
+                  onLogout={handleLogout}
                 />
               ) : (
                 <Navigate to="/login" replace />
               )
-            } 
+            }
           />
-          <Route 
-            path="/" 
-            element={<Navigate to="/dashboard" replace />} 
+          {/* New Routes */}
+          {[
+            { path: 'activity', title: 'Actividad' },
+            { path: 'metrics', title: 'Métricas' },
+            { path: 'analysis', title: 'Análisis' },
+            { path: 'calls', title: 'Llamadas' },
+            { path: 'providers', title: 'Proveedores' },
+            { path: 'reports', title: 'Reportes' },
+            { path: 'performance', title: 'Rendimiento' },
+            { path: 'settings', title: 'Configuración' },
+          ].map((route) => (
+            <Route
+              key={route.path}
+              path={`/${route.path}`}
+              element={
+                isAuthenticated ? (
+                  <DashboardPage
+                    currentUser={currentUser}
+                    onLogout={handleLogout}
+                    initialTab={route.path} // Pass the path to DashboardPage to render placeholder
+                    placeholderTitle={route.title} // Pass the title for PlaceholderPage
+                  />
+                ) : (
+                  <Navigate to="/login" replace />
+                )
+              }
+            />
+          ))}
+          <Route
+            path="/"
+            element={<Navigate to="/dashboard" replace />}
           />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

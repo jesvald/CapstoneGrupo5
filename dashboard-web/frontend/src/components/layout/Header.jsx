@@ -30,20 +30,6 @@ function Header({ currentUser, onLogout, onToggleSidebar, onRefresh, refreshing 
           </div>
         </div>
 
-        {/* Center - Search */}
-        <div className="hidden md:flex flex-1 max-w-md mx-8">
-          <div className="relative w-full">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Search className="h-5 w-5 text-gray-400" />
-            </div>
-            <input
-              type="text"
-              placeholder="Buscar métricas, proveedores, etc..."
-              className="form-control pl-10 w-full rounded-full"
-            />
-          </div>
-        </div>
-
         {/* Right side */}
         <div className="flex items-center gap-3">
           {/* Notifications */}
