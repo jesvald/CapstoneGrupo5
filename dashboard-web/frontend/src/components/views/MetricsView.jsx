@@ -47,22 +47,27 @@ const MetricsView = () => {
 
                 // Process categories from providers
                 const catMap = {};
+                console.log('Provider data sample:', provData.slice(0, 3));
                 provData.forEach(p => {
                     if (!catMap[p.rubro]) {
                         catMap[p.rubro] = { calls: 0, success: 0, offers: 0 };
                     }
-                    catMap[p.rubro].calls += p.total_llamadas;
-                    catMap[p.rubro].success += p.contactos_exitosos;
-                    catMap[p.rubro].offers += p.ofertas_generadas;
+                    // Ensure we're working with numbers, not strings
+                    catMap[p.rubro].calls += parseInt(p.total_llamadas) || 0;
+                    catMap[p.rubro].success += parseInt(p.contactos_exitosos) || 0;
+                    catMap[p.rubro].offers += parseInt(p.ofertas_generadas) || 0;
                 });
+
+                console.log('Category map:', catMap);
 
                 const catArray = Object.keys(catMap).map(key => ({
                     cat: key,
                     calls: catMap[key].calls,
                     success: catMap[key].calls > 0 ? Math.round((catMap[key].success / catMap[key].calls) * 100) + '%' : '0%',
-                    conv: catMap[key].success > 0 ? Math.round((catMap[key].offers / catMap[key].success) * 100) + '%' : '0%'
+                    conv: catMap[key].calls > 0 ? Math.round((catMap[key].offers / catMap[key].calls) * 100) + '%' : '0%'
                 })).sort((a, b) => b.calls - a.calls);
 
+                console.log('Category array:', catArray);
                 setCategories(catArray);
 
             } catch (error) {
