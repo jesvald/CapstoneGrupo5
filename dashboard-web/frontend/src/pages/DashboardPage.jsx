@@ -29,7 +29,7 @@ function DashboardPage({ currentUser, onLogout }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  
+
   // Datos del dashboard
   const [kpis, setKpis] = useState(null);
   const [performance, setPerformance] = useState(null);
@@ -37,7 +37,7 @@ function DashboardPage({ currentUser, onLogout }) {
   const [historical, setHistorical] = useState([]);
   const [providers, setProviders] = useState([]);
   const [alerts, setAlerts] = useState([]);
-  
+
   // Filtros de fecha - Mostrar todos los registros posibles por defecto (todo el tiempo)
   const { startDate, endDate, setDateRange, getDefaultRange } = useDateRange('all'); // Todo el tiempo
 
@@ -121,7 +121,7 @@ function DashboardPage({ currentUser, onLogout }) {
   }
 
   return (
-    <div className="layout-container">
+    <div className="min-h-screen bg-canvas-secondary lg:pl-64 flex flex-col transition-all duration-300">
       {/* Header */}
       <Header
         currentUser={currentUser}
@@ -135,7 +135,7 @@ function DashboardPage({ currentUser, onLogout }) {
       <Sidebar isOpen={sidebarOpen} currentUser={currentUser} />
 
       {/* Main Content */}
-      <main className="layout-main">
+      <main className="flex-1 p-6 lg:p-8 overflow-auto">
         <div className="max-w-screen-xl mx-auto w-full">
           {/* Título y Filtros */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
@@ -218,7 +218,7 @@ function DashboardPage({ currentUser, onLogout }) {
               </div>
             )}
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             {/* Rendimiento Histórico */}
             {historical && historical.length > 0 && (
@@ -229,7 +229,7 @@ function DashboardPage({ currentUser, onLogout }) {
                 <HistoricalChart data={historical} />
               </div>
             )}
-            
+
             {/* Top Proveedores */}
             {providers && providers.length > 0 && (
               <div className="card">

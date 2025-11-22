@@ -14,10 +14,7 @@ export default defineConfig({
       }
     }
   },
-  css: {
-    // Disable preprocessorOptions and postcss processing to prevent Tailwind from loading
-    devSourcemap: true
-  },
+  // css property removed to allow standard PostCSS processing
   build: {
     outDir: 'dist',
     sourcemap: true

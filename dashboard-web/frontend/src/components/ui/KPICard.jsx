@@ -1,9 +1,9 @@
 import React from 'react';
-import { 
-  Phone, 
-  CheckCircle, 
-  Clock, 
-  TrendingUp, 
+import {
+  Phone,
+  CheckCircle,
+  Clock,
+  TrendingUp,
   TrendingDown,
   Users,
   DollarSign,
@@ -27,7 +27,7 @@ const iconMap = {
 
 function KPICard({ title, value, subtitle, icon = 'phone', color = 'primary', trend }) {
   const Icon = iconMap[icon] || Phone;
-  
+
   // Map color prop to gradient classes
   const colorClasses = {
     primary: 'from-primary-500 to-primary-600',
@@ -39,14 +39,14 @@ function KPICard({ title, value, subtitle, icon = 'phone', color = 'primary', tr
     purple: 'from-purple-500 to-purple-600',
     indigo: 'from-indigo-500 to-indigo-600'
   };
-  
+
   const gradientClass = colorClasses[color] || colorClasses.primary;
 
   return (
-    <div className="card group relative overflow-hidden aspect-square flex flex-col p-3">
+    <div className="bg-canvas-card rounded-DEFAULT shadow-md transition-all duration-300 border border-border-DEFAULT relative overflow-hidden hover:shadow-xl hover:-translate-y-1 group aspect-square flex flex-col p-3">
       {/* Gradient background */}
       <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${gradientClass}`}></div>
-      
+
       <div className="flex items-start justify-between flex-1">
         <div className="flex-1">
           <p className="text-[0.7rem] font-medium text-gray-600 mb-1">{title}</p>
@@ -55,7 +55,7 @@ function KPICard({ title, value, subtitle, icon = 'phone', color = 'primary', tr
             <p className="text-[0.6rem] text-gray-500">{subtitle}</p>
           )}
         </div>
-        
+
         <div className={`p-1.5 rounded-md bg-gradient-to-br ${gradientClass} text-white`}>
           <Icon className="h-3.5 w-3.5" />
         </div>

@@ -263,44 +263,11 @@ code {
   background: var(--gray-400);
 }
 
-/* Card Components */
-.card {
-  background: var(--bg-card);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-md);
-  padding: var(--spacing-lg);
-  transition: all var(--transition-normal);
-  border: 1px solid var(--border-color);
-  position: relative;
-  overflow: hidden;
-}
+/* Card Components - Removed (Refactored to Tailwind) */
 
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--primary-500), var(--secondary-500));
-  opacity: 0;
-  transition: opacity var(--transition-normal);
-}
+/* Layout System - Removed (Refactored to Tailwind) */
 
-.card:hover {
-  box-shadow: var(--shadow-xl);
-  transform: translateY(-4px);
-}
-
-.card:hover::before {
-  opacity: 1;
-}
-
-.card-sm { padding: var(--spacing-md); }
-.card-md { padding: var(--spacing-lg); }
-.card-lg { padding: var(--spacing-xl); }
-
-/* Modern Button Styles */
+/* Grid system - Removed (Refactored to Tailwind) */
 .btn {
   display: inline-flex;
   align-items: center;

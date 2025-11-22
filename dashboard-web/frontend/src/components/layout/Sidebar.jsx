@@ -1,9 +1,9 @@
 import React from 'react';
-import { 
-  LayoutDashboard, 
-  BarChart3, 
-  Users, 
-  Phone, 
+import {
+  LayoutDashboard,
+  BarChart3,
+  Users,
+  Phone,
   Settings,
   FileText,
   TrendingUp,
@@ -34,7 +34,7 @@ function Sidebar({ isOpen, currentUser }) {
   });
 
   return (
-    <aside className={`layout-sidebar ${isOpen ? 'open' : ''}`}>
+    <aside className={`fixed inset-y-0 left-0 z-dropdown w-64 bg-canvas-sidebar text-ink-inverse transition-transform duration-300 lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
       <div className="flex flex-col h-full">
         {/* Navigation */}
         <nav className="flex-1 py-6 px-4 overflow-y-auto">
@@ -45,11 +45,10 @@ function Sidebar({ isOpen, currentUser }) {
                 <li key={index}>
                   <a
                     href="#"
-                    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
-                      item.active
-                        ? 'bg-primary-500 text-white shadow-md'
-                        : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                    }`}
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${item.active
+                      ? 'bg-primary-500 text-white shadow-md'
+                      : 'text-neutral-300 hover:bg-neutral-700 hover:text-white'
+                      }`}
                   >
                     <Icon className="h-5 w-5" />
                     <span className="font-medium">{item.label}</span>
@@ -72,7 +71,7 @@ function Sidebar({ isOpen, currentUser }) {
               <p className="text-sm font-medium text-white truncate">
                 {currentUser?.name || 'Usuario'}
               </p>
-              <p className="text-xs text-gray-400 truncate">
+              <p className="text-xs text-neutral-400 truncate">
                 {currentUser?.role || 'Rol'}
               </p>
             </div>
