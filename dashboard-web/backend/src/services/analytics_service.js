@@ -358,7 +358,9 @@ async function getCalls(startDate, endDate, limit = 100) {
  */
 async function getRecentActivity(limit = 10) {
   try {
-    // Fetch recent calls
+    const parsedLimit = Math.max(1, Math.min(100, parseInt(limit, 10) || 10));
+
+    // Fetch recent calls - using template literal for LIMIT since it doesn't work with prepared statements
     const callsSql = `
       SELECT 
         'call' as type,
@@ -371,7 +373,7 @@ async function getRecentActivity(limit = 10) {
       FROM llamadas l
       JOIN proveedores p ON l.proveedor_id = p.id
       ORDER BY l.fecha_llamada DESC
-      LIMIT ?
+      LIMIT ${parsedLimit}
     `;
 
     // Fetch recent offers
@@ -387,13 +389,12 @@ async function getRecentActivity(limit = 10) {
       JOIN proveedores p ON o.proveedor_id = p.id
       JOIN licitaciones l ON o.licitacion_id = l.id
       ORDER BY o.fecha_oferta DESC
-      LIMIT ?
+      LIMIT ${parsedLimit}
     `;
 
-    const parsedLimit = parseInt(limit) || 10;
     const [calls, offers] = await Promise.all([
-      query(callsSql, [parsedLimit]),
-      query(offersSql, [parsedLimit])
+      query(callsSql, []),
+      query(offersSql, [])
     ]);
 
     // Combine and sort
