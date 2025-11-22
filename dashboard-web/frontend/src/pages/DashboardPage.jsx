@@ -247,9 +247,7 @@ function DashboardPage({ currentUser, onLogout }) {
                     <h3 className="text-h4 font-semibold text-gray-900 mb-2">
                       Top Proveedores
                     </h3>
-                    <div className="overflow-x-auto">
-                      <ProvidersTable providers={providers} />
-                    </div>
+                    <ProvidersTable providers={providers} />
                   </div>
                 )}
               </div>

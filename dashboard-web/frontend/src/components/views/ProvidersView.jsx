@@ -53,7 +53,7 @@ const ProvidersView = () => {
                                     {provider.nombre.charAt(0)}
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-ink-primary">{provider.nombre}</h3>
+                                    <h3 className="font-semibold text-ink-primary truncate max-w-[150px] sm:max-w-[200px]" title={provider.nombre}>{provider.nombre}</h3>
                                     <span className="text-xs text-ink-secondary px-2 py-0.5 bg-canvas-secondary rounded-full border border-border-DEFAULT">
                                         {provider.rubro}
                                     </span>
@@ -66,12 +66,14 @@ const ProvidersView = () => {
 
                         <div className="space-y-3 mb-6">
                             <div className="flex items-center gap-2 text-sm text-ink-secondary">
-                                <Phone className="h-4 w-4 text-ink-tertiary" />
+                                <Phone className="h-4 w-4 text-ink-tertiary flex-shrink-0" />
                                 <span>+56 9 {Math.floor(Math.random() * 90000000 + 10000000)}</span>
                             </div>
                             <div className="flex items-center gap-2 text-sm text-ink-secondary">
-                                <Mail className="h-4 w-4 text-ink-tertiary" />
-                                <span>contacto@{provider.nombre.toLowerCase().replace(/\s+/g, '')}.cl</span>
+                                <Mail className="h-4 w-4 text-ink-tertiary flex-shrink-0" />
+                                <span className="truncate" title={`contacto@${provider.nombre.toLowerCase().replace(/\s+/g, '')}.cl`}>
+                                    contacto@{provider.nombre.toLowerCase().replace(/\s+/g, '')}.cl
+                                </span>
                             </div>
                             <div className="flex items-center gap-2 text-sm text-ink-secondary">
                                 <MapPin className="h-4 w-4 text-ink-tertiary" />
