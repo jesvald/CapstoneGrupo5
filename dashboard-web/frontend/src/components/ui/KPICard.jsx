@@ -43,7 +43,7 @@ function KPICard({ title, value, subtitle, icon = 'phone', color = 'primary', tr
   const gradientClass = colorClasses[color] || colorClasses.primary;
 
   return (
-    <div className="bg-canvas-card rounded-DEFAULT shadow-md transition-all duration-300 border border-border-DEFAULT relative overflow-hidden hover:shadow-xl hover:-translate-y-1 group aspect-square flex flex-col p-3">
+    <div className="bg-canvas-card rounded-DEFAULT shadow-md transition-all duration-300 border border-border-DEFAULT relative overflow-hidden hover:shadow-xl hover:-translate-y-1 group flex flex-col p-3">
       {/* Gradient background */}
       <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${gradientClass}`}></div>
 
