@@ -10,6 +10,7 @@ const ActivityView = () => {
         const fetchActivity = async () => {
             try {
                 const data = await getRecentActivity(20);
+                console.log('Activity data:', data);
                 setActivities(data);
             } catch (error) {
                 console.error('Error fetching activity:', error);

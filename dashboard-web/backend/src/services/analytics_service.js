@@ -324,18 +324,20 @@ async function getCalls(startDate, endDate, limit = 100) {
       JOIN proveedores p ON l.proveedor_id = p.id
       WHERE l.fecha_llamada BETWEEN ? AND ?
       ORDER BY l.fecha_llamada DESC
-      LIMIT ?
     `;
 
     // Format dates
     const mysqlFormattedStart = new Date(startDate).toISOString().slice(0, 19).replace('T', ' ');
     const mysqlFormattedEnd = new Date(endDate).toISOString().slice(0, 19).replace('T', ' ');
-    const parsedLimit = Math.max(1, Math.min(500, parseInt(limit) || 100));
 
-    const results = await query(sql, [mysqlFormattedStart, mysqlFormattedEnd, parsedLimit]);
+    const results = await query(sql, [mysqlFormattedStart, mysqlFormattedEnd]);
+
+    // Apply limit in JavaScript instead of SQL to avoid parameter issues
+    const parsedLimit = Math.max(1, Math.min(500, parseInt(limit) || 100));
+    const limitedResults = results.slice(0, parsedLimit);
 
     // Format results for frontend
-    const calls = results.map(row => ({
+    const calls = limitedResults.map(row => ({
       id: row.id,
       date: row.fecha_llamada,
       provider: row.proveedor,

@@ -10,6 +10,7 @@ const AnalysisView = () => {
         const fetchAnalysis = async () => {
             try {
                 const response = await getSentimentAnalysis();
+                console.log('Sentiment analysis data:', response);
                 setAnalysis(response);
             } catch (error) {
                 console.error('Error fetching analysis:', error);
@@ -25,17 +26,21 @@ const AnalysisView = () => {
         return <div className="p-8 text-center text-ink-secondary">Cargando análisis...</div>;
     }
 
+    // Ensure all values are properly parsed as numbers
     const sentimentData = [
-        { name: 'Positivo', value: analysis?.sentimiento.positivo || 0, color: '#10B981' },
-        { name: 'Neutro', value: analysis?.sentimiento.neutro || 0, color: '#6B7280' },
-        { name: 'Negativo', value: analysis?.sentimiento.negativo || 0, color: '#EF4444' },
+        { name: 'Positivo', value: parseInt(analysis?.sentimiento.positivo) || 0, color: '#10B981' },
+        { name: 'Neutro', value: parseInt(analysis?.sentimiento.neutro) || 0, color: '#6B7280' },
+        { name: 'Negativo', value: parseInt(analysis?.sentimiento.negativo) || 0, color: '#EF4444' },
     ];
 
     const interestData = [
-        { status: 'Interesados', count: analysis?.interes.interesados || 0 },
-        { status: 'No Interesados', count: analysis?.interes.noInteresados || 0 },
-        { status: 'Indecisos', count: analysis?.interes.indeciso || 0 },
+        { status: 'Interesados', count: parseInt(analysis?.interes.interesados) || 0 },
+        { status: 'No Interesados', count: parseInt(analysis?.interes.noInteresados) || 0 },
+        { status: 'Indecisos', count: parseInt(analysis?.interes.indeciso) || 0 },
     ];
+
+    console.log('Processed sentiment data:', sentimentData);
+    console.log('Processed interest data:', interestData);
 
     return (
         <div className="space-y-6">

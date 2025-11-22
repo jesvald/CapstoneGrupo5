@@ -14,6 +14,8 @@ const PerformanceView = () => {
                     getPerformanceMetrics(),
                     getHistoricalPerformance(null, null, 'hour') // Hourly for "Today" view or just general trend
                 ]);
+                console.log('Performance metrics data:', metricsData);
+                console.log('Historical performance data:', historicalData);
                 setMetrics(metricsData);
                 setHistorical(historicalData);
             } catch (error) {
@@ -30,20 +32,23 @@ const PerformanceView = () => {
         return <div className="p-8 text-center text-ink-secondary">Cargando rendimiento...</div>;
     }
 
-    // Transform metrics for charts
+    // Transform metrics for charts - ensure all values are numbers
     const statusData = [
-        { name: 'Completadas', value: metrics?.completadas || 0, color: '#10B981' },
-        { name: 'Ocupadas', value: metrics?.ocupadas || 0, color: '#F59E0B' },
-        { name: 'Sin Respuesta', value: metrics?.sinRespuesta || 0, color: '#6B7280' },
-        { name: 'Fallidas', value: metrics?.fallidas || 0, color: '#EF4444' },
+        { name: 'Completadas', value: parseInt(metrics?.completadas) || 0, color: '#10B981' },
+        { name: 'Ocupadas', value: parseInt(metrics?.ocupadas) || 0, color: '#F59E0B' },
+        { name: 'Sin Respuesta', value: parseInt(metrics?.sinRespuesta) || 0, color: '#6B7280' },
+        { name: 'Fallidas', value: parseInt(metrics?.fallidas) || 0, color: '#EF4444' },
     ];
 
     // Transform historical for hourly chart
     const hourlyData = historical.map(item => ({
         time: item.periodo.split(' ')[1]?.substring(0, 5) || item.periodo, // Extract HH:MM if datetime
-        calls: item.totalLlamadas,
-        success: item.contactosExitosos
+        calls: parseInt(item.totalLlamadas) || 0,
+        success: parseInt(item.contactosExitosos) || 0
     }));
+
+    console.log('Processed status data:', statusData);
+    console.log('Processed hourly data:', hourlyData);
 
     return (
         <div className="space-y-6">
