@@ -19,6 +19,32 @@ Backend del Dashboard de Monitoreo para el Sistema de Invitaciones y Ofertas en 
 
 ## Instalación
 
+### Con Docker (Recomendado)
+
+La forma más fácil de ejecutar el backend es usando Docker:
+
+```bash
+# Desde el directorio raíz del proyecto
+docker compose up -d backend
+
+# Ver logs
+docker compose logs -f backend
+
+# Acceder al contenedor
+docker compose exec backend sh
+```
+
+El backend estará disponible en `http://localhost:3001`
+
+**Características del contenedor**:
+- ✅ Espera automáticamente a que MySQL esté listo
+- ✅ Ejecuta el script de seed data automáticamente
+- ✅ Incluye health checks
+- ✅ Reinicio automático en caso de fallo
+- ✅ Ejecuta como usuario no-root para seguridad
+
+### Instalación Manual
+
 1. Instalar dependencias:
 ```bash
 npm install
@@ -48,22 +74,55 @@ JWT_SECRET=tu_secreto_jwt
 mkdir logs
 ```
 
+5. (Opcional) Cargar datos de prueba:
+```bash
+node scripts/seed_data.js
+```
+
+
 ## Uso
 
-### Desarrollo
+### Con Docker
+```bash
+# Iniciar el backend
+docker compose up -d backend
+
+# Ver logs en tiempo real
+docker compose logs -f backend
+
+# Reiniciar el backend
+docker compose restart backend
+
+# Detener el backend
+docker compose stop backend
+
+# Ejecutar comandos dentro del contenedor
+docker compose exec backend npm test
+docker compose exec backend node scripts/seed_data.js
+```
+
+### Manual
+
+#### Desarrollo
 ```bash
 npm run dev
 ```
 
-### Producción
+#### Producción
 ```bash
 npm start
 ```
 
-### Tests
+#### Tests
 ```bash
 npm test
 ```
+
+#### Seed Data
+```bash
+node scripts/seed_data.js
+```
+
 
 ## API Endpoints
 

@@ -1,12 +1,114 @@
-# Guía de Instalación Rápida - Dashboard B2B
+# Guía de Instalación - Dashboard B2B
 
-Esta guía te ayudará a poner en marcha el Dashboard de Monitoreo en menos de 10 minutos.
+Esta guía te ayudará a poner en marcha el Dashboard de Monitoreo de forma rápida y sencilla.
 
-## Instalación Rápida
+## Instalación con Docker (Recomendado)
 
-### Paso 1: Requisitos Previos
+La forma más rápida y sencilla de ejecutar el dashboard es usando Docker. Todo está preconfigurado y listo para usar.
 
-Verifica que tengas instalado:
+### Requisitos Previos
+
+- **Docker** 20.10+ ([Descargar Docker](https://www.docker.com/get-started))
+- **Docker Compose** v2.0+ (incluido con Docker Desktop)
+
+### Instalación Rápida
+
+1. **Clonar el repositorio** (si aún no lo has hecho):
+```bash
+git clone <repository-url>
+cd CapstoneGrupo5/dashboard-web
+```
+
+2. **Iniciar todos los servicios**:
+```bash
+docker compose up -d
+```
+
+Esto iniciará automáticamente:
+- Base de datos MySQL con el esquema completo
+- Backend API en Node.js/Express
+- Frontend React servido con Nginx
+- **Datos de prueba** (50 proveedores, 20 licitaciones, 500 llamadas)
+
+3. **Acceder al Dashboard**:
+```
+URL: http://localhost:3000
+Usuario: admin@dashboard.com
+Contraseña: Admin123!
+```
+
+¡Listo! El dashboard está funcionando con datos de prueba.
+
+### Comandos Útiles de Docker
+
+```bash
+# Ver el estado de los servicios
+docker compose ps
+
+# Ver logs en tiempo real
+docker compose logs -f
+
+# Ver logs de un servicio específico
+docker compose logs -f backend
+docker compose logs -f frontend
+docker compose logs -f mysql
+
+# Detener todos los servicios
+docker compose down
+
+# Reiniciar un servicio específico
+docker compose restart backend
+
+# Reconstruir y reiniciar
+docker compose up -d --build
+
+# Detener y eliminar TODO (incluyendo datos de la BD)
+docker compose down -v
+```
+
+### Puertos Utilizados
+
+- **Frontend**: http://localhost:3000
+- **Backend API**: http://localhost:3001
+- **MySQL**: localhost:3307 (mapeado desde el puerto 3306 del contenedor)
+
+### Verificación
+
+**Backend Health Check**:
+```bash
+curl http://localhost:3001/health
+```
+
+Deberías ver:
+```json
+{
+  "success": true,
+  "status": "healthy",
+  "timestamp": "...",
+  "uptime": 123
+}
+```
+
+**Verificar datos en la base de datos**:
+```bash
+docker compose exec mysql mysql -u dashboard_user -pdashboard_password licitaciones_b2b -e "SELECT COUNT(*) FROM llamadas;"
+```
+
+### Datos de Prueba
+
+El sistema incluye datos de prueba que se cargan automáticamente:
+- **50 proveedores** de diferentes industrias y regiones
+- **20 licitaciones** activas con diferentes categorías
+- **500 llamadas** con estados, sentimientos y conversiones realistas
+- **~132 ofertas** generadas automáticamente
+
+---
+
+## Instalación Manual (Desarrollo)
+
+Si prefieres ejecutar los servicios de forma individual para desarrollo, sigue estos pasos:
+
+### Requisitos Previos
 
 ```bash
 node --version  # Debe ser v18.0.0 o superior
@@ -14,7 +116,7 @@ npm --version   # Debe ser v9.0.0 o superior
 mysql --version # Debe ser v8.0 o superior
 ```
 
-### Paso 2: Configurar MySQL
+### Paso 1: Configurar MySQL
 
 1. **Iniciar MySQL**:
 ```bash
@@ -29,24 +131,20 @@ brew services start mysql
 
 2. **Crear la base de datos**:
 ```bash
-mysql -u root -p
-```
-
-Luego ejecuta:
-```sql
-source C:/Users/jesus/Desktop/CapstoneGrupo5/dashboard-web/backend/database_schema.sql
-```
-
-O alternativamente:
-```bash
 mysql -u root -p < backend/database_schema.sql
 ```
 
-### Paso 3: Configurar el Backend
+3. **Cargar datos de prueba** (opcional):
+```bash
+cd backend
+node scripts/seed_data.js
+```
+
+### Paso 2: Configurar el Backend
 
 1. **Navegar al directorio del backend**:
 ```bash
-cd C:\Users\jesus\Desktop\CapstoneGrupo5\dashboard-web\backend
+cd backend
 ```
 
 2. **Instalar dependencias**:
@@ -54,10 +152,7 @@ cd C:\Users\jesus\Desktop\CapstoneGrupo5\dashboard-web\backend
 npm install
 ```
 
-3. **Crear archivo de configuración**:
-
-Crear un archivo llamado `.env` en `dashboard-web/backend/` con el siguiente contenido:
-
+3. **Crear archivo de configuración `.env`**:
 ```env
 # Configuración del Servidor
 PORT=3001
@@ -83,9 +178,6 @@ CACHE_TTL=300
 # Configuración de Rate Limiting
 RATE_LIMIT_WINDOW_MS=900000
 RATE_LIMIT_MAX_REQUESTS=100
-
-# Logging
-LOG_LEVEL=info
 ```
 
 **IMPORTANTE**: Reemplaza `tu_contraseña_mysql` con tu contraseña real de MySQL.
@@ -102,16 +194,16 @@ npm run dev
 
 Deberías ver:
 ```
-Servidor iniciado en puerto 3001
-Dashboard Backend API corriendo en http://localhost:3001
+🚀 Servidor iniciado en puerto 3001
+📊 Dashboard Backend API corriendo en http://localhost:3001
 ✓ Sistema listo para recibir peticiones
 ```
 
-### Paso 4: Configurar el Frontend
+### Paso 3: Configurar el Frontend
 
 1. **Abrir una NUEVA terminal** y navegar al frontend:
 ```bash
-cd C:\Users\jesus\Desktop\CapstoneGrupo5\dashboard-web\frontend
+cd frontend
 ```
 
 2. **Instalar dependencias**:
@@ -119,20 +211,23 @@ cd C:\Users\jesus\Desktop\CapstoneGrupo5\dashboard-web\frontend
 npm install
 ```
 
-3. **Iniciar la aplicación**:
+3. **Crear archivo `.env`** (opcional):
+```env
+VITE_API_BASE_URL=http://localhost:3001/api
+```
+
+4. **Iniciar la aplicación**:
 ```bash
 npm run dev
 ```
 
 Deberías ver:
 ```
-  VITE v5.0.8  ready in 500 ms
-
-  ➜  Local:   http://localhost:3000/
-  ➜  Network: use --host to expose
+VITE v5.0.8  ready in 500 ms
+➜  Local:   http://localhost:3000/
 ```
 
-### Paso 5: Acceder al Dashboard
+### Paso 4: Acceder al Dashboard
 
 1. **Abrir tu navegador** y ve a:
 ```
@@ -145,41 +240,51 @@ Email: admin@dashboard.com
 Contraseña: Admin123!
 ```
 
-¡Listo! Ya deberías estar viendo el Dashboard.
+---
 
-## Verificación
+## Solución de Problemas
 
-### Backend funcionando correctamente
+### Docker
 
-Abre en tu navegador:
+#### Error: "port is already allocated"
+**Causa**: El puerto ya está en uso por otro servicio.
+
+**Solución**:
+```bash
+# Ver qué está usando el puerto
+# En Linux/Mac
+lsof -i :3000
+lsof -i :3001
+lsof -i :3307
+
+# En Windows
+netstat -ano | findstr :3000
+
+# Detener el servicio o cambiar el puerto en docker-compose.yml
 ```
-http://localhost:3001/health
+
+#### Error: "Cannot connect to Docker daemon"
+**Causa**: Docker no está ejecutándose.
+
+**Solución**:
+- Inicia Docker Desktop
+- En Linux: `sudo systemctl start docker`
+
+#### Los contenedores no inician correctamente
+**Solución**:
+```bash
+# Ver logs detallados
+docker compose logs
+
+# Reconstruir desde cero
+docker compose down -v
+docker compose build --no-cache
+docker compose up -d
 ```
 
-Deberías ver:
-```json
-{
-  "success": true,
-  "status": "healthy",
-  "timestamp": "...",
-  "uptime": 123
-}
-```
+### Instalación Manual
 
-### Frontend conectado al Backend
-
-Si ves el dashboard con datos, ¡todo funciona!
-
-Si ves errores, verifica:
-1. Backend está corriendo en puerto 3001
-2. MySQL está corriendo
-3. Credenciales de BD son correctas en .env
-4. No hay errores en la consola del navegador
-
-## Solución de Problemas Comunes
-
-### Error: "Cannot connect to MySQL"
-
+#### Error: "Cannot connect to MySQL"
 **Solución**:
 1. Verifica que MySQL esté corriendo
 2. Revisa las credenciales en `.env`
@@ -189,28 +294,19 @@ Si ves errores, verifica:
 mysql -u root -p -e "SHOW DATABASES;"
 ```
 
-### Error: "Port 3001 already in use"
-
-**Solución en Windows**:
-```powershell
-# Ver qué proceso está usando el puerto
-netstat -ano | findstr :3001
-
-# Matar el proceso (reemplaza PID con el número que aparece)
-taskkill /PID <PID> /F
-```
-
+#### Error: "Port 3001 already in use"
 **Solución en Linux/Mac**:
 ```bash
 lsof -ti:3001 | xargs kill -9
 ```
 
-### Error: "Port 3000 already in use"
+**Solución en Windows**:
+```powershell
+netstat -ano | findstr :3001
+taskkill /PID <PID> /F
+```
 
-Igual que arriba, pero reemplaza 3001 con 3000.
-
-### Error: "Cannot find module"
-
+#### Error: "Cannot find module"
 **Solución**:
 ```bash
 # Eliminar node_modules y reinstalar
@@ -218,8 +314,7 @@ rm -rf node_modules package-lock.json
 npm install
 ```
 
-### La página no carga / Pantalla en blanco
-
+#### La página no carga / Pantalla en blanco
 **Solución**:
 1. Abre la consola del navegador (F12)
 2. Ve a la pestaña "Network"
@@ -227,17 +322,32 @@ npm install
 4. Verifica si hay errores 404 o 500
 5. Revisa que el backend esté corriendo
 
-### "Token expirado"
-
+#### "Token expirado"
 **Solución**:
 1. Cierra sesión
 2. Vuelve a iniciar sesión
 3. El token tiene una duración de 24 horas
 
-## Verificar Datos de Ejemplo
+---
 
-El script de base de datos incluye datos de ejemplo. Para verificar:
+## Verificar Datos
 
+### Con Docker
+```bash
+# Conectarse a MySQL
+docker compose exec mysql mysql -u dashboard_user -pdashboard_password licitaciones_b2b
+
+# Ver estadísticas
+docker compose exec mysql mysql -u dashboard_user -pdashboard_password licitaciones_b2b -e "
+SELECT 
+  (SELECT COUNT(*) FROM proveedores) as proveedores,
+  (SELECT COUNT(*) FROM licitaciones) as licitaciones,
+  (SELECT COUNT(*) FROM llamadas) as llamadas,
+  (SELECT COUNT(*) FROM ofertas) as ofertas;
+"
+```
+
+### Manual
 ```sql
 mysql -u root -p
 USE licitaciones_b2b;
@@ -246,44 +356,46 @@ USE licitaciones_b2b;
 SELECT * FROM usuarios;
 
 -- Ver proveedores de ejemplo
-SELECT * FROM proveedores;
+SELECT * FROM proveedores LIMIT 5;
 
 -- Ver llamadas de ejemplo
-SELECT * FROM llamadas;
+SELECT * FROM llamadas LIMIT 5;
+
+-- Estadísticas
+SELECT COUNT(*) FROM llamadas;
+SELECT COUNT(*) FROM ofertas;
 ```
 
-## Reiniciar el Sistema
-
-### Detener todo
-
-**Backend** (Ctrl + C en la terminal del backend)
-**Frontend** (Ctrl + C en la terminal del frontend)
-
-### Iniciar de nuevo
-
-**Terminal 1 - Backend**:
-```bash
-cd dashboard-web/backend
-npm run dev
-```
-
-**Terminal 2 - Frontend**:
-```bash
-cd dashboard-web/frontend
-npm run dev
-```
+---
 
 ## Modo Producción
 
-### Backend
+### Con Docker (Recomendado)
 
+El setup de Docker ya está optimizado para producción. Solo necesitas:
+
+1. **Actualizar variables de entorno** en `docker-compose.yml`:
+```yaml
+environment:
+  NODE_ENV: production
+  JWT_SECRET: <tu_secreto_seguro_aquí>
+  MYSQL_ROOT_PASSWORD: <contraseña_segura>
+  MYSQL_PASSWORD: <contraseña_segura>
+```
+
+2. **Usar un reverse proxy** (Nginx, Traefik) para HTTPS
+
+3. **Configurar backups** para el volumen de MySQL
+
+### Manual
+
+**Backend**:
 ```bash
 cd backend
 npm start
 ```
 
-### Frontend
-
+**Frontend**:
 ```bash
 cd frontend
 npm run build
@@ -292,44 +404,34 @@ npm run preview
 
 Los archivos de producción estarán en `frontend/dist/`
 
-## Siguiente Pasos
+---
 
-Una vez que el dashboard esté funcionando:
+## Recursos Adicionales
 
-1. **Explorar el Dashboard**:
-   - Prueba los filtros de fecha
-   - Revisa los diferentes gráficos
-   - Mira las alertas del sistema
+- [README Principal](./README.md) - Documentación completa del proyecto
+- [Backend README](./backend/README.md) - Documentación del API
+- [Frontend README](./frontend/README.md) - Documentación del frontend
+- [Walkthrough Docker](./walkthrough.md) - Guía detallada de Docker
 
-2. **Crear más usuarios** (como Admin):
-   - Ve a la API directamente o usa Postman
-   - POST `http://localhost:3001/api/auth/register`
-
-3. **Agregar más datos**:
-   - Inserta más proveedores y llamadas en la BD
-   - El dashboard se actualizará automáticamente
-
-4. **Personalizar**:
-   - Modifica los colores en `frontend/src/styles/index.css`
-   - Ajusta los umbrales de alertas en `backend/src/services/analytics_service.js`
+---
 
 ## ¿Necesitas Ayuda?
 
 1. **Revisa los logs**:
-   - Backend: `dashboard-web/backend/logs/`
+   - Docker: `docker compose logs -f`
+   - Backend manual: `backend/logs/`
    - Frontend: Consola del navegador (F12)
 
-2. **Revisa la documentación**:
-   - [README Principal](../README.md)
-   - [Backend README](./backend/README.md)
-   - [Frontend README](./frontend/README.md)
-
-3. **Verifica el estado de los servicios**:
-   - MySQL: `systemctl status mysql` (Linux) o Services (Windows)
+2. **Verifica el estado de los servicios**:
+   - MySQL: `docker compose ps` o `systemctl status mysql`
    - Backend: `http://localhost:3001/health`
    - Frontend: `http://localhost:3000`
 
+3. **Consulta la documentación**:
+   - Revisa los archivos README de cada componente
+   - Verifica la sección de troubleshooting arriba
 
+---
 
-
-
+**Versión**: 2.0.0 (con Docker)  
+**Última actualización**: Noviembre 2025

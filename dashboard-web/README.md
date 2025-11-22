@@ -343,11 +343,51 @@ npm run build
 # Los archivos estarán en /dist
 ```
 
-### Docker (Futuro)
+### Docker (Recommended)
+
+The easiest way to run the complete application is using Docker Compose:
 
 ```bash
+# Build and start all services (MySQL, Backend, Frontend)
 docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop all services
+docker-compose down
+
+# Stop and remove volumes (WARNING: deletes database data)
+docker-compose down -v
 ```
+
+**Access the application:**
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:3001
+- MySQL: localhost:3306
+
+**Default credentials:**
+- Email: admin@dashboard.com
+- Password: Admin123!
+
+**Individual service management:**
+```bash
+# Rebuild a specific service
+docker-compose build backend
+
+# Restart a service
+docker-compose restart frontend
+
+# View service logs
+docker-compose logs -f backend
+```
+
+**Environment variables:**
+All environment variables are configured in `docker-compose.yml`. For production, update:
+- `MYSQL_ROOT_PASSWORD`
+- `MYSQL_PASSWORD`
+- `JWT_SECRET`
+
 
 ## Seguridad
 

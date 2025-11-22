@@ -21,6 +21,34 @@ Frontend del Dashboard de Monitoreo construido con React y Vite.
 
 ## Instalación
 
+### Con Docker (Recomendado)
+
+La forma más fácil de ejecutar el frontend es usando Docker:
+
+```bash
+# Desde el directorio raíz del proyecto
+docker compose up -d frontend
+
+# Ver logs
+docker compose logs -f frontend
+
+# Reconstruir después de cambios
+docker compose build frontend
+docker compose up -d frontend
+```
+
+El frontend estará disponible en `http://localhost:3000`
+
+**Características del contenedor**:
+- ✅ Build optimizado con Vite
+- ✅ Servido con Nginx para máximo rendimiento
+- ✅ Configuración SPA para React Router
+- ✅ Proxy automático al backend
+- ✅ Compresión gzip habilitada
+- ✅ Headers de seguridad configurados
+
+### Instalación Manual
+
 1. Instalar dependencias:
 ```bash
 cd dashboard-web/frontend
@@ -33,29 +61,52 @@ Crear archivo `.env` en la raíz del frontend:
 VITE_API_BASE_URL=http://localhost:3001/api
 ```
 
+
 ## Uso
 
-### Desarrollo
+### Con Docker
+```bash
+# Iniciar el frontend
+docker compose up -d frontend
+
+# Ver logs en tiempo real
+docker compose logs -f frontend
+
+# Reiniciar el frontend
+docker compose restart frontend
+
+# Detener el frontend
+docker compose stop frontend
+
+# Reconstruir después de cambios en el código
+docker compose build frontend
+docker compose up -d frontend
+```
+
+### Manual
+
+#### Desarrollo
 ```bash
 npm run dev
 ```
 La aplicación estará disponible en `http://localhost:3000`
 
-### Build para Producción
+#### Build para Producción
 ```bash
 npm run build
 ```
 Los archivos de producción se generarán en el directorio `/dist`
 
-### Preview de Build
+#### Preview de Build
 ```bash
 npm run preview
 ```
 
-### Linting
+#### Linting
 ```bash
 npm run lint
 ```
+
 
 ## Estructura del Proyecto
 
