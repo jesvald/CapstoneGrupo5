@@ -10,7 +10,7 @@ const AnalysisView = () => {
         const fetchAnalysis = async () => {
             try {
                 const response = await getSentimentAnalysis();
-                setAnalysis(response.data);
+                setAnalysis(response);
             } catch (error) {
                 console.error('Error fetching analysis:', error);
             } finally {

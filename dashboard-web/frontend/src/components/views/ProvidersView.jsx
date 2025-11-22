@@ -10,7 +10,7 @@ const ProvidersView = () => {
         const fetchProviders = async () => {
             try {
                 const response = await getTopProviders(null, null, 50);
-                setProviders(response.data);
+                setProviders(response);
             } catch (error) {
                 console.error('Error fetching providers:', error);
             } finally {

@@ -52,50 +52,61 @@ const ActivityView = () => {
         return <div className="p-8 text-center text-ink-secondary">Cargando actividad...</div>;
     }
 
+    if (!Array.isArray(activities)) {
+        return <div className="p-8 text-center text-red-500">Error al cargar la actividad reciente.</div>;
+    }
+
     return (
         <div className="space-y-6">
             <div className="flex items-center justify-between">
                 <h2 className="text-2xl font-bold text-ink-primary">Actividad Reciente</h2>
-                <button className="px-4 py-2 bg-canvas-card border border-border-DEFAULT rounded-lg text-sm font-medium text-ink-secondary hover:bg-canvas-hover transition-colors">
+                <button
+                    onClick={() => window.location.reload()}
+                    className="px-4 py-2 bg-canvas-card border border-border-DEFAULT rounded-lg text-sm font-medium text-ink-secondary hover:bg-canvas-hover transition-colors"
+                >
                     Actualizar
                 </button>
             </div>
 
             <div className="bg-canvas-card rounded-xl shadow-sm border border-border-DEFAULT p-6">
-                <div className="flow-root">
-                    <ul className="-mb-8">
-                        {activities.map((activity, activityIdx) => {
-                            const Icon = getIcon(activity.type, activity.status);
-                            const styles = getStyles(activity.type, activity.status);
+                {activities.length === 0 ? (
+                    <div className="text-center text-ink-secondary py-8">No hay actividad reciente.</div>
+                ) : (
+                    <div className="flow-root">
+                        <ul className="-mb-8">
+                            {activities.map((activity, activityIdx) => {
+                                const Icon = getIcon(activity.type, activity.status);
+                                const styles = getStyles(activity.type, activity.status);
 
-                            return (
-                                <li key={activity.id}>
-                                    <div className="relative pb-8">
-                                        {activityIdx !== activities.length - 1 ? (
-                                            <span className="absolute top-4 left-4 -ml-px h-full w-0.5 bg-border-DEFAULT" aria-hidden="true" />
-                                        ) : null}
-                                        <div className="relative flex space-x-3">
-                                            <div>
-                                                <span className={`h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-canvas-card ${styles.bg}`}>
-                                                    <Icon className={`h-5 w-5 ${styles.color}`} aria-hidden="true" />
-                                                </span>
-                                            </div>
-                                            <div className="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+                                return (
+                                    <li key={activity.id}>
+                                        <div className="relative pb-8">
+                                            {activityIdx !== activities.length - 1 ? (
+                                                <span className="absolute top-4 left-4 -ml-px h-full w-0.5 bg-border-DEFAULT" aria-hidden="true" />
+                                            ) : null}
+                                            <div className="relative flex space-x-3">
                                                 <div>
-                                                    <p className="text-sm font-medium text-ink-primary">{activity.title}</p>
-                                                    <p className="text-sm text-ink-secondary mt-1">{activity.description}</p>
+                                                    <span className={`h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-canvas-card ${styles.bg}`}>
+                                                        <Icon className={`h-5 w-5 ${styles.color}`} aria-hidden="true" />
+                                                    </span>
                                                 </div>
-                                                <div className="text-right text-sm whitespace-nowrap text-ink-tertiary">
-                                                    <time dateTime={activity.time}>{formatTime(activity.time)}</time>
+                                                <div className="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+                                                    <div>
+                                                        <p className="text-sm font-medium text-ink-primary">{activity.title}</p>
+                                                        <p className="text-sm text-ink-secondary mt-1">{activity.description}</p>
+                                                    </div>
+                                                    <div className="text-right text-sm whitespace-nowrap text-ink-tertiary">
+                                                        <time dateTime={activity.time}>{formatTime(activity.time)}</time>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                            );
-                        })}
-                    </ul>
-                </div>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
+                )}
             </div>
         </div>
     );

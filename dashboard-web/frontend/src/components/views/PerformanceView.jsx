@@ -14,8 +14,8 @@ const PerformanceView = () => {
                     getPerformanceMetrics(),
                     getHistoricalPerformance(null, null, 'hour') // Hourly for "Today" view or just general trend
                 ]);
-                setMetrics(metricsData.data);
-                setHistorical(historicalData.data);
+                setMetrics(metricsData);
+                setHistorical(historicalData);
             } catch (error) {
                 console.error('Error fetching performance data:', error);
             } finally {
