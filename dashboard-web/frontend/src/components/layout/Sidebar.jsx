@@ -5,8 +5,6 @@ import {
   BarChart3,
   Users,
   Phone,
-  Settings,
-  FileText,
   TrendingUp,
   Activity,
   PieChart,
@@ -23,9 +21,7 @@ function Sidebar({ isOpen, currentUser }) {
     { icon: PieChart, label: 'Análisis', path: '/analysis' },
     { icon: Phone, label: 'Llamadas', path: '/calls' },
     { icon: Users, label: 'Proveedores', path: '/providers' },
-    { icon: FileText, label: 'Reportes', path: '/reports' },
-    { icon: TrendingUp, label: 'Rendimiento', path: '/performance' },
-    { icon: Settings, label: 'Configuración', path: '/settings', admin: true }
+    { icon: TrendingUp, label: 'Rendimiento', path: '/performance' }
   ];
 
   // Filtrar items según el rol

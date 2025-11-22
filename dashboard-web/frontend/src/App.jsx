@@ -101,9 +101,7 @@ function App() {
             { path: 'analysis', title: 'Análisis' },
             { path: 'calls', title: 'Llamadas' },
             { path: 'providers', title: 'Proveedores' },
-            { path: 'reports', title: 'Reportes' },
             { path: 'performance', title: 'Rendimiento' },
-            { path: 'settings', title: 'Configuración' },
           ].map((route) => (
             <Route
               key={route.path}

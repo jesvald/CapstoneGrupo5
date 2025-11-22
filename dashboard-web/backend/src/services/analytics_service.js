@@ -22,7 +22,7 @@ async function getMainKPIs(startDate, endDate) {
       FROM llamadas
       WHERE fecha_llamada BETWEEN ? AND ?
     `;
-    
+
     const results = await query(sql, [startDate, endDate]);
     const data = results[0];
 
@@ -32,12 +32,12 @@ async function getMainKPIs(startDate, endDate) {
       llamadasCompletadas: data.llamadas_completadas || 0,
       contactoExitoso: {
         count: data.contactos_exitosos || 0,
-        percentage: data.total_llamadas > 0 
+        percentage: data.total_llamadas > 0
           ? ((data.contactos_exitosos / data.total_llamadas) * 100).toFixed(2)
           : 0
       },
-      duracionPromedio: data.duracion_promedio 
-        ? Math.round(data.duracion_promedio) 
+      duracionPromedio: data.duracion_promedio
+        ? Math.round(data.duracion_promedio)
         : 0,
       conversionOferta: {
         count: data.conversiones_oferta || 0,
@@ -70,7 +70,7 @@ async function getPerformanceMetrics(startDate, endDate) {
       WHERE fecha_llamada BETWEEN ? AND ?
       GROUP BY estado
     `;
-    
+
     const results = await query(sql, [startDate, endDate]);
 
     // Estructurar los resultados
@@ -84,7 +84,7 @@ async function getPerformanceMetrics(startDate, endDate) {
 
     results.forEach(row => {
       metrics.total += row.cantidad;
-      switch(row.estado) {
+      switch (row.estado) {
         case 'completada':
           metrics.completadas = row.cantidad;
           break;
@@ -123,7 +123,7 @@ async function getSentimentAnalysis(startDate, endDate) {
         AND estado = 'completada'
       GROUP BY sentimiento, proveedor_interesado
     `;
-    
+
     const results = await query(sql, [startDate, endDate]);
 
     const analysis = {
@@ -165,7 +165,7 @@ async function getSentimentAnalysis(startDate, endDate) {
 async function getHistoricalPerformance(startDate, endDate, groupBy = 'day') {
   try {
     let dateFormat;
-    switch(groupBy) {
+    switch (groupBy) {
       case 'hour':
         dateFormat = '%Y-%m-%d %H:00:00';
         break;
@@ -191,7 +191,7 @@ async function getHistoricalPerformance(startDate, endDate, groupBy = 'day') {
       GROUP BY periodo
       ORDER BY periodo ASC
     `;
-    
+
     const results = await query(sql, [startDate, endDate]);
 
     const historicalData = results.map(row => ({
@@ -200,7 +200,7 @@ async function getHistoricalPerformance(startDate, endDate, groupBy = 'day') {
       contactosExitosos: row.contactos_exitosos,
       conversiones: row.conversiones,
       duracionPromedio: row.duracion_promedio ? Math.round(row.duracion_promedio) : 0,
-      tasaContacto: row.total_llamadas > 0 
+      tasaContacto: row.total_llamadas > 0
         ? ((row.contactos_exitosos / row.total_llamadas) * 100).toFixed(2)
         : 0,
       tasaConversion: row.contactos_exitosos > 0
@@ -235,14 +235,14 @@ async function getTopProviders(startDate, endDate, limit = 10) {
       GROUP BY p.id, p.nombre, p.rubro
       ORDER BY ofertas_generadas DESC, contactos_exitosos DESC
     `;
-    
+
     // Ensure all parameters are properly formatted
     // Format dates to MySQL DATETIME format (YYYY-MM-DD HH:MM:SS)
     const mysqlFormattedStart = new Date(startDate).toISOString().slice(0, 19).replace('T', ' ');
     const mysqlFormattedEnd = new Date(endDate).toISOString().slice(0, 19).replace('T', ' ');
-    
+
     const results = await query(sql, [mysqlFormattedStart, mysqlFormattedEnd]);
-    
+
     // Limit results in JavaScript instead of using MySQL LIMIT to avoid parameter issues
     const parsedLimit = Math.max(1, Math.min(100, parseInt(limit) || 10)); // Ensure limit is within 1-100 range
     const limitedResults = results.slice(0, parsedLimit);
@@ -304,12 +304,172 @@ async function getSystemAlerts(startDate, endDate) {
   }
 }
 
+/**
+ * Obtener listado detallado de llamadas
+ */
+async function getCalls(startDate, endDate, limit = 100) {
+  try {
+    const sql = `
+      SELECT 
+        l.id,
+        l.fecha_llamada,
+        p.nombre as proveedor,
+        l.duracion_segundos,
+        l.estado,
+        l.sentimiento,
+        l.proveedor_interesado,
+        l.conversion_oferta,
+        l.transcripcion
+      FROM llamadas l
+      JOIN proveedores p ON l.proveedor_id = p.id
+      WHERE l.fecha_llamada BETWEEN ? AND ?
+      ORDER BY l.fecha_llamada DESC
+      LIMIT ?
+    `;
+
+    // Format dates
+    const mysqlFormattedStart = new Date(startDate).toISOString().slice(0, 19).replace('T', ' ');
+    const mysqlFormattedEnd = new Date(endDate).toISOString().slice(0, 19).replace('T', ' ');
+    const parsedLimit = Math.max(1, Math.min(500, parseInt(limit) || 100));
+
+    const results = await query(sql, [mysqlFormattedStart, mysqlFormattedEnd, parsedLimit]);
+
+    // Format results for frontend
+    const calls = results.map(row => ({
+      id: row.id,
+      date: row.fecha_llamada,
+      provider: row.proveedor,
+      duration: formatDuration(row.duracion_segundos),
+      status: mapStatus(row.estado),
+      sentiment: capitalize(row.sentimiento || '-'),
+      result: mapResult(row)
+    }));
+
+    logger.info('Listado de llamadas obtenido', { count: calls.length });
+    return calls;
+  } catch (error) {
+    logger.error('Error al obtener llamadas', { error: error.message });
+    throw error;
+  }
+}
+
+/**
+ * Obtener actividad reciente (timeline)
+ */
+async function getRecentActivity(limit = 10) {
+  try {
+    // Fetch recent calls
+    const callsSql = `
+      SELECT 
+        'call' as type,
+        l.id,
+        l.fecha_llamada as created_at,
+        p.nombre as entity_name,
+        l.estado,
+        l.proveedor_interesado,
+        l.conversion_oferta
+      FROM llamadas l
+      JOIN proveedores p ON l.proveedor_id = p.id
+      ORDER BY l.fecha_llamada DESC
+      LIMIT ?
+    `;
+
+    // Fetch recent offers
+    const offersSql = `
+      SELECT 
+        'offer' as type,
+        o.id,
+        o.fecha_oferta as created_at,
+        p.nombre as entity_name,
+        o.monto_ofertado,
+        l.codigo as tender_code
+      FROM ofertas o
+      JOIN proveedores p ON o.proveedor_id = p.id
+      JOIN licitaciones l ON o.licitacion_id = l.id
+      ORDER BY o.fecha_oferta DESC
+      LIMIT ?
+    `;
+
+    const parsedLimit = parseInt(limit) || 10;
+    const [calls, offers] = await Promise.all([
+      query(callsSql, [parsedLimit]),
+      query(offersSql, [parsedLimit])
+    ]);
+
+    // Combine and sort
+    const combined = [...calls, ...offers]
+      .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+      .slice(0, parsedLimit);
+
+    // Format for frontend
+    const activity = combined.map(item => {
+      if (item.type === 'call') {
+        return {
+          id: `call-${item.id}`,
+          type: 'call',
+          title: item.estado === 'completada' ? `Llamada con ${item.entity_name}` : `Intento de llamada a ${item.entity_name}`,
+          description: item.conversion_oferta ? 'Generó una oferta' : (item.proveedor_interesado ? 'Interesado' : 'No interesado/Ocupado'),
+          time: item.created_at,
+          status: item.estado
+        };
+      } else {
+        return {
+          id: `offer-${item.id}`,
+          type: 'offer',
+          title: 'Nueva oferta recibida',
+          description: `${item.entity_name} ofertó en ${item.tender_code}`,
+          time: item.created_at,
+          amount: item.monto_ofertado
+        };
+      }
+    });
+
+    logger.info('Actividad reciente obtenida', { count: activity.length });
+    return activity;
+  } catch (error) {
+    logger.error('Error al obtener actividad reciente', { error: error.message });
+    throw error;
+  }
+}
+
+// Helpers
+function formatDuration(seconds) {
+  if (!seconds) return '0:00';
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+
+function mapStatus(status) {
+  const map = {
+    'completada': 'Completada',
+    'ocupada': 'Ocupada',
+    'fallida': 'Fallida',
+    'sin_respuesta': 'Sin Respuesta'
+  };
+  return map[status] || status;
+}
+
+function mapResult(row) {
+  if (row.conversion_oferta) return 'Oferta';
+  if (row.proveedor_interesado) return 'Interesado';
+  if (row.estado === 'completada') return 'No Interesado';
+  return 'Reintentar';
+}
+
+function capitalize(str) {
+  if (!str) return '';
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 module.exports = {
   getMainKPIs,
   getPerformanceMetrics,
   getSentimentAnalysis,
   getHistoricalPerformance,
   getTopProviders,
-  getSystemAlerts
+  getSystemAlerts,
+  getCalls,
+  getRecentActivity
 };
 

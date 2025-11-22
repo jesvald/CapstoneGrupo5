@@ -98,7 +98,7 @@ export const getKPIs = async (startDate, endDate) => {
   const params = {};
   if (startDate) params.startDate = startDate;
   if (endDate) params.endDate = endDate;
-  
+
   const response = await apiClient.get('/metrics/kpis', { params });
   return response.data;
 };
@@ -110,7 +110,7 @@ export const getPerformanceMetrics = async (startDate, endDate) => {
   const params = {};
   if (startDate) params.startDate = startDate;
   if (endDate) params.endDate = endDate;
-  
+
   const response = await apiClient.get('/metrics/performance', { params });
   return response.data;
 };
@@ -122,7 +122,7 @@ export const getSentimentAnalysis = async (startDate, endDate) => {
   const params = {};
   if (startDate) params.startDate = startDate;
   if (endDate) params.endDate = endDate;
-  
+
   const response = await apiClient.get('/metrics/sentiment', { params });
   return response.data;
 };
@@ -134,7 +134,7 @@ export const getHistoricalPerformance = async (startDate, endDate, groupBy = 'da
   const params = { groupBy };
   if (startDate) params.startDate = startDate;
   if (endDate) params.endDate = endDate;
-  
+
   const response = await apiClient.get('/metrics/historical', { params });
   return response.data;
 };
@@ -146,9 +146,30 @@ export const getTopProviders = async (startDate, endDate, limit = 10) => {
   const params = { limit };
   if (startDate) params.startDate = startDate;
   if (endDate) params.endDate = endDate;
-  
+
   const response = await apiClient.get('/metrics/providers', { params });
   return response.data;
+};
+
+/**
+ * Obtener listado de llamadas
+ */
+export const getCalls = async (startDate, endDate, limit = 100) => {
+  const params = { limit };
+  if (startDate) params.startDate = startDate;
+  if (endDate) params.endDate = endDate;
+
+  const response = await apiClient.get('/metrics/calls', { params });
+  return response; // Backend returns array directly
+};
+
+/**
+ * Obtener actividad reciente
+ */
+export const getRecentActivity = async (limit = 10) => {
+  const params = { limit };
+  const response = await apiClient.get('/metrics/activity', { params });
+  return response; // Backend returns array directly
 };
 
 /**
@@ -158,7 +179,7 @@ export const getSystemAlerts = async (startDate, endDate) => {
   const params = {};
   if (startDate) params.startDate = startDate;
   if (endDate) params.endDate = endDate;
-  
+
   const response = await apiClient.get('/metrics/alerts', { params });
   return response.data;
 };
