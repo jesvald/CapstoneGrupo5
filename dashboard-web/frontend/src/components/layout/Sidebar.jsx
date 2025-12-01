@@ -33,7 +33,7 @@ function Sidebar({ isOpen, currentUser }) {
   });
 
   return (
-    <aside className={`fixed inset-y-0 left-0 z-dropdown w-64 bg-canvas-sidebar text-ink-inverse transition-transform duration-300 lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+    <aside className={`fixed inset-y-0 left-0 z-dropdown w-64 bg-canvas-sidebar text-ink-inverse transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
       <div className="flex flex-col h-full">
         {/* Navigation */}
         <nav className="flex-1 py-6 px-4 overflow-y-auto">

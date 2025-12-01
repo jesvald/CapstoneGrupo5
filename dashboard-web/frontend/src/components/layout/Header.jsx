@@ -33,10 +33,7 @@ function Header({ currentUser, onLogout, onToggleSidebar, onRefresh, refreshing 
         {/* Right side */}
         <div className="flex items-center gap-3">
           {/* Notifications */}
-          <button className="p-2 rounded-full hover:bg-gray-100 relative">
-            <Bell className="h-5 w-5 text-gray-600" />
-            <span className="absolute top-1 right-1 h-2 w-2 bg-red-500 rounded-full"></span>
-          </button>
+
 
           {/* Refresh button */}
           <button
@@ -54,34 +51,7 @@ function Header({ currentUser, onLogout, onToggleSidebar, onRefresh, refreshing 
           </button>
 
           {/* User dropdown */}
-          <div className="relative">
-            <button className="flex items-center gap-2 p-2 rounded-xl hover:bg-gray-100">
-              <div className="h-9 w-9 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-full flex items-center justify-center">
-                <User className="h-5 w-5 text-white" />
-              </div>
-              <div className="hidden md:block">
-                <p className="text-sm font-medium text-gray-900">
-                  {currentUser?.name || 'Usuario'}
-                </p>
-                <p className="text-xs text-gray-500">
-                  {currentUser?.role || 'Rol'}
-                </p>
-              </div>
-              <ChevronDown className="h-4 w-4 text-gray-500" />
-            </button>
 
-            {/* User dropdown menu - simplified for this implementation */}
-            <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 hidden">
-              <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Perfil</a>
-              <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Configuración</a>
-              <button
-                onClick={onLogout}
-                className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-              >
-                Cerrar sesión
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </header>

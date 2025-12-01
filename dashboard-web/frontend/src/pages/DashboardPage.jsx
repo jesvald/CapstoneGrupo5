@@ -130,7 +130,7 @@ function DashboardPage({ currentUser, onLogout }) {
   }
 
   return (
-    <div className="min-h-screen bg-canvas-secondary lg:pl-64 flex flex-col transition-all duration-300">
+    <div className={`min-h-screen bg-canvas-secondary flex flex-col transition-all duration-300 ${sidebarOpen ? 'lg:pl-64' : 'lg:pl-0'}`}>
       {/* Header */}
       <Header
         currentUser={currentUser}
